@@ -1,7 +1,7 @@
 adresses = {
   global = {
-    -- [byte][read/write] hex value is the decimal display
-    character_select_timer = 0x020154FB,
+    -- [byte][read/write] 1st value is the decimal display, 2nd is the per-frame counter
+    character_select_timer = { 0x020154FB, 0x020154FF }
   },
   players = {
     {

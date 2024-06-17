@@ -85,7 +85,8 @@ function update_character_select(_input, _do_fast_forward)
   end
 
   -- Infinite select time
-  --memory.writebyte(adresses.global.character_select_timer, 0x30)
+  memory.writebyte(adresses.global.character_select_timer[1], 0x30)
+  memory.writebyte(adresses.global.character_select_timer[2], 0x32)
 
   if (character_select_coroutine ~= nil) then
     make_input_empty(_input)
