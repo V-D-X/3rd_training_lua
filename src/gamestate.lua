@@ -740,6 +740,7 @@ function read_player_vars(_player_obj)
 
     -- WAKE UP
     local _debug_wakeup = false
+    _player_obj.previous_can_fast_wakeup2 = _player_obj.previous_can_fast_wakeup or 0
     _player_obj.previous_can_fast_wakeup = _player_obj.can_fast_wakeup or 0
     _player_obj.can_fast_wakeup = memory.readbyte(_player_obj.base + 0x402)
 

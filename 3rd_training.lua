@@ -1258,16 +1258,20 @@ end
 
 function update_fast_wake_up(_input, _player, _dummy, _mode)
   if is_in_match and _mode ~= 1 and current_recording_state ~= 4 then
-    --local _should_tap_down = _dummy.previous_can_fast_wakeup == 0 and _dummy.can_fast_wakeup == 1
-    -- ��QS���ɋ����I�Ƀj���[�g����������
-    local _should_tap_neutral = _dummy.previous_can_fast_wakeup  == 0 and _dummy.can_fast_wakeup == 1
-    local _should_tap_down    = _dummy.previous_can_fast_wakeup2 == 0 and _dummy.previous_can_fast_wakeup == 1
+    local _should_tap_neutral
+    local _should_tap_down 
 
-    -- add ashtanga
+    if _dummy.animation == "eca0" or _dummy.animation == "659c" then --Exception for twins vs Alex throws (2f window vs normal 5f)
+      _should_tap_neutral = false
+      _should_tap_down    = _dummy.previous_can_fast_wakeup  == 0 and _dummy.can_fast_wakeup == 1
+    else
+      _should_tap_neutral = _dummy.previous_can_fast_wakeup  == 0 and _dummy.can_fast_wakeup == 1
+      _should_tap_down    = _dummy.previous_can_fast_wakeup2 == 0 and _dummy.previous_can_fast_wakeup == 1
+    end
+
     if _should_tap_neutral then
         _input[dummy.prefix..' Down'] = false
     elseif _should_tap_down then
-    --if _should_tap_down then
       local _r = math.random()
       if _mode ~= 3 or _r > 0.5 then
         _input[dummy.prefix..' Down'] = true
