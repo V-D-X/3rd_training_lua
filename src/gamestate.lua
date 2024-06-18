@@ -239,6 +239,7 @@ function read_game_object(_obj)
   _obj.previous_pos_x = _obj.pos_x or 0
   _obj.previous_pos_y = _obj.pos_y or 0
   _obj.pos_x = memory.readwordsigned(_obj.base + 0x64)
+  _obj.pos_xcounter = memory.readbyte(_obj.base + 0x66)
   _obj.pos_y = memory.readwordsigned(_obj.base + 0x68)
   _obj.char_id = memory.readword(_obj.base + 0x3C0)
 

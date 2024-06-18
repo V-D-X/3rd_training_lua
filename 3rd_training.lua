@@ -1617,6 +1617,7 @@ training_settings = {
   frame_advantage_display_mode = 1,
   display_hitboxes = false,
   display_distances = false,
+  display_character_subpixel_coordinate = false,
   mid_distance_height = 70,
   p1_distances_reference_point = 1,
   p2_distances_reference_point = 2,
@@ -1751,6 +1752,10 @@ mid_distance_height_item = integer_menu_item("  Mid Distance Height", training_s
 mid_distance_height_item.is_disabled = function()
   return not training_settings.display_distances
 end
+character_subpixel_coordinate_item = checkbox_menu_item("  Display X Subpixel", training_settings, "display_character_subpixel_coordinate")
+character_subpixel_coordinate_item.is_disabled = function()
+  return not training_settings.display_distances
+end
 
 main_menu = make_multitab_menu(
 --23, 15, 360, 195, -- screen size 383,223
@@ -1800,6 +1805,7 @@ main_menu = make_multitab_menu(
         mid_distance_height_item,
         p1_distances_reference_point_item,
         p2_distances_reference_point_item,
+        character_subpixel_coordinate_item,
       }
     },
     {
