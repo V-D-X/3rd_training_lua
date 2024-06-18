@@ -1583,14 +1583,14 @@ training_settings = {
   counter_attack_button = 1,
   fast_wakeup_mode = 1,
   infinite_time = true,
-  life_mode = 3, --1,
+  life_mode = 2,
   p1_life_reset_value = 160, -- add ashtanga
   p2_life_reset_value = 160, -- add ashtanga
-  meter_mode = 3, --1,
+  meter_mode = 2,
   p1_meter = 0,
   p2_meter = 0,
   infinite_sa_time = false,
-  stun_mode = 1,
+  stun_mode = 2,
   p1_stun_reset_value = 0,
   p2_stun_reset_value = 0,
   stun_reset_delay = 20,
@@ -1654,8 +1654,8 @@ debug_settings = {
 --life_refill_delay_item.is_disabled = function()
 --  return training_settings.life_mode ~= 2
 --end
-p1_life_refill_delay_item = gauge_menu_item("  P1 Life reset value", training_settings, "p1_life_reset_value", 1, 0x00FF00FF, 160)
-p2_life_refill_delay_item = gauge_menu_item("  P2 Life reset value", training_settings, "p2_life_reset_value", 1, 0x00FF00FF, 160)
+p1_life_refill_delay_item = gauge_menu_item("  P1 Life reset value", training_settings, "p1_life_reset_value", 1, 0x00FF00FF, 160, 160)
+p2_life_refill_delay_item = gauge_menu_item("  P2 Life reset value", training_settings, "p2_life_reset_value", 1, 0x00FF00FF, 160, 160)
 p1_life_refill_delay_item.is_disabled = function()
   return training_settings.life_mode ~= 2
 end
@@ -1696,7 +1696,7 @@ meter_refill_delay_item.is_disabled = p1_meter_gauge_item.is_disabled
 
 slot_weight_item = integer_menu_item("Weight", nil, "weight", 0, 100, false, 1)
 counter_attack_delay_item = integer_menu_item("Counter-attack delay", nil, "delay", -40, 40, false, 0)
-counter_attack_random_deviation_item = integer_menu_item("Counter-attack max random deviation", nil, "random_deviation", -600, 600, false, 0, 1)
+counter_attack_random_deviation_item = integer_menu_item("Counter-attack max random deviation", nil, "random_deviation", 0, 600, false, 0, 1)
 
 parry_forward_on_item = checkbox_menu_item("Forward Parry Helper", training_settings, "special_training_parry_forward_on")
 parry_forward_on_item.is_disabled = function() return training_settings.special_training_current_mode ~= 2 end
@@ -1752,14 +1752,14 @@ main_menu = make_multitab_menu(
         list_menu_item("Tech Throws", training_settings, "tech_throws_mode", tech_throws_mode),
         list_menu_item("Counter-Attack Move", training_settings, "counter_attack_stick", stick_gesture),
         list_menu_item("Counter-Attack Action", training_settings, "counter_attack_button", button_gesture),
-        list_menu_item("Fast Wake Up", training_settings, "fast_wakeup_mode", fast_wakeup_mode),
+        list_menu_item("Fast Wake Up", training_settings, "fast_wakeup_mode", fast_wakeup_mode, 2),
       }
     },
     {
       name = "Recording",
       entries = {
-        checkbox_menu_item("Auto Crop First Frames", training_settings, "auto_crop_recording_start"),
-        checkbox_menu_item("Auto Crop Last Frames", training_settings, "auto_crop_recording_end"),
+        checkbox_menu_item("Auto Crop First Frames", training_settings, "auto_crop_recording_start", true),
+        checkbox_menu_item("Auto Crop Last Frames", training_settings, "auto_crop_recording_end", true),
         list_menu_item("Replay Mode", training_settings, "replay_mode", slot_replay_mode),
         list_menu_item("Slot", training_settings, "current_recording_slot", recording_slots_names),
         slot_weight_item,
@@ -1792,22 +1792,22 @@ main_menu = make_multitab_menu(
       name = "Rules",
       entries = {
         change_characters_item,
-        checkbox_menu_item("Infinite Time", training_settings, "infinite_time"),
-        list_menu_item("Life Refill Mode", training_settings, "life_mode", life_mode),
+        checkbox_menu_item("Infinite Time", training_settings, "infinite_time", true),
+        list_menu_item("Life Refill Mode", training_settings, "life_mode", life_mode, 2),
         --life_refill_delay_item,
         p1_life_refill_delay_item,
         p2_life_refill_delay_item,
-        list_menu_item("Stun Mode", training_settings, "stun_mode", stun_mode),
+        list_menu_item("Stun Mode", training_settings, "stun_mode", stun_mode, 3),
         p1_stun_reset_value_gauge_item,
         p2_stun_reset_value_gauge_item,
         stun_reset_delay_item,
-        list_menu_item("Meter Refill Mode", training_settings, "meter_mode", meter_mode),
+        list_menu_item("Meter Refill Mode", training_settings, "meter_mode", meter_mode, 2),
         p1_meter_gauge_item,
         p2_meter_gauge_item,
         meter_refill_delay_item,
         checkbox_menu_item("Infinite Super Art Time", training_settings, "infinite_sa_time"),
         integer_menu_item("Music Volume", training_settings, "music_volume", 0, 10, false, 10),
-        checkbox_menu_item("Speed Up Game Intro", training_settings, "fast_forward_intro"),
+        checkbox_menu_item("Speed Up Game Intro", training_settings, "fast_forward_intro", 2),
       }
     },
     {
@@ -2382,7 +2382,7 @@ function before_frame()
     if distance_char_old > training_settings.replay_start_distance and distance_char <= training_settings.replay_start_distance then
       -- print("Distance Mode")
       -- print(distance_char_old, distance_char)
---      set_recording_state(_input, 1)
+      -- set_recording_state(_input, 1)
       set_recording_state(_input, 4)
     end
   else

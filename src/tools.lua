@@ -97,7 +97,7 @@ end
 
 function check_input_down_autofire(_player_object, _input, _autofire_rate, _autofire_time)
   _autofire_rate = _autofire_rate or 4
-  _autofire_time = _autofire_time or 23
+  _autofire_time = _autofire_time or 14
   if _player_object.input.pressed[_input] or (_player_object.input.down[_input] and _player_object.input.state_time[_input] > _autofire_time and (_player_object.input.state_time[_input] % _autofire_rate) == 0) then
     return true
   end
