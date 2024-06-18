@@ -12,7 +12,8 @@ print("- Enter training menu by pressing \"Start\" while in game")
 print("- Enter/exit recording mode by double tapping \"Coin\"")
 print("- In recording mode, press \"Coin\" again to start/stop recording")
 print("- In normal mode, press \"Coin\" to start/stop replay")
-print("- Lua Hotkey 1 (alt+1) to return to character select screen")
+print("- Lua Hotkey 1 (Alt+1) to return to character select screen")
+print("- Lua Hotkeys 2 and 3 (Alt+2/3) to adjust character position")
 print("")
 
 -- ��2021.11.22
@@ -2296,12 +2297,44 @@ end
 function hotkey2()
   if character_select_sequence_state ~= 0 then
     select_gill()
+  else
+    local playerOneXSubpixelAddress = P1.base + 0x66
+    local playerTwoXSubpixelAddress = P2.base + 0x66
+
+    memory.writebyte(playerOneXSubpixelAddress, 0)
+    memory.writebyte(playerTwoXSubpixelAddress, 0)
+
+    local xPosAddress
+
+    if current_recording_state == 1 then --normal or replay is playing, controlling P1
+      xPosAddress = P1.base + 0x64
+      memory.writeword(xPosAddress, P1.pos_x - 1)
+    else 
+      xPosAddress = P2.base + 0x64
+      memory.writeword(xPosAddress, P2.pos_x - 1)
+    end 
   end
 end
 
 function hotkey3()
   if character_select_sequence_state ~= 0 then
     select_shingouki()
+  else
+    local playerOneXSubpixelAddress = P1.base + 0x66
+    local playerTwoXSubpixelAddress = P2.base + 0x66
+
+    memory.writebyte(playerOneXSubpixelAddress, 0)
+    memory.writebyte(playerTwoXSubpixelAddress, 0)
+
+    local xPosAddress
+
+    if current_recording_state == 1 then --normal or replay is playing, controlling P1
+      xPosAddress = P1.base + 0x64
+      memory.writeword(xPosAddress, P1.pos_x + 1)
+    else 
+      xPosAddress = P2.base + 0x64
+      memory.writeword(xPosAddress, P2.pos_x + 1)
+    end 
   end
 end
 
