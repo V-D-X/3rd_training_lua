@@ -1,6 +1,10 @@
 attack_data = {}
 
 function attack_data_update(_attacker, _defender)
+  if training_settings.attack_data_mode == 3 then
+    _attacker, _defender = _defender, _attacker
+  end
+  
   attack_data.player_id = _attacker.id
 
   if _attacker.combo == nil then

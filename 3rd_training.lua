@@ -437,6 +437,20 @@ hit_type =
   "overhead",
 }
 
+attack_data_mode = 
+{
+  "off",
+  "on",
+  "CPU's action",
+}
+
+frame_advantage_display_mode = 
+{
+  "off",
+  "on",
+  "CPU's action",
+}
+
 life_mode =
 {
   "no refill",
@@ -1599,8 +1613,8 @@ training_settings = {
   display_p1_input_history = false,
   display_p1_input_history_dyanamic = false,
   display_p2_input_history = false,
-  display_attack_data = false,
-  display_frame_advantage = false,
+  attack_data_mode = 1,
+  frame_advantage_display_mode = 1,
   display_hitboxes = false,
   display_distances = false,
   mid_distance_height = 70,
@@ -1779,8 +1793,8 @@ main_menu = make_multitab_menu(
         checkbox_menu_item("Display P1 Input History", training_settings, "display_p1_input_history"),
         checkbox_menu_item("Dynamic P1 Input History", training_settings, "display_p1_input_history_dynamic"),
         display_p2_input_history_item,
-        checkbox_menu_item("Display Damage Info", training_settings, "display_attack_data"),
-        checkbox_menu_item("Display Frame Advantage", training_settings, "display_frame_advantage"),
+        list_menu_item("Display Damage Info", training_settings, "attack_data_mode", attack_data_mode),
+        list_menu_item("Display Frame Advantage", training_settings, "frame_advantage_display_mode", frame_advantage_display_mode),
         checkbox_menu_item("Display Hitboxes", training_settings, "display_hitboxes"),
         checkbox_menu_item("Display Distances", training_settings, "display_distances"),
         mid_distance_height_item,
@@ -2600,12 +2614,12 @@ function on_gui()
 
     -- attack data
     -- do not show if special training not following character is on, otherwise it will overlap
-    if training_settings.display_attack_data and (training_settings.special_training_current_mode == 1 or training_settings.special_training_follow_character) then
+    if training_settings.attack_data_mode ~= 1 and (training_settings.special_training_current_mode == 1 or training_settings.special_training_follow_character) then
       attack_data_display()
     end
 
     -- move advantage
-    if training_settings.display_frame_advantage then
+    if training_settings.frame_advantage_display_mode ~= 1 then
       frame_advantage_display()
     end
 

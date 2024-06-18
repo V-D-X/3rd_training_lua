@@ -2,6 +2,9 @@ move_advantage = {}
 
 function frame_advantage_update(_attacker, _defender)
 
+  if training_settings.frame_advantage_display_mode == 3 then
+    _attacker, _defender = _defender, _attacker
+  end
   function has_just_attacked(_player_obj)
     return _player_obj.has_just_attacked or _player_obj.has_just_thrown or (_player_obj.recovery_time == 0 and _player_obj.freeze_frames == 0 and _player_obj.input_capacity == 0 and _player_obj.previous_input_capacity ~= 0) or (_player_obj.movement_type == 4 and _player_obj.last_movement_type_change_frame == 0)
   end
