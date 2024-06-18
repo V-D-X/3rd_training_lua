@@ -1522,7 +1522,7 @@ function save_recording_slot_to_file()
   end
 
   local _path = string.format("%s%s.json",saved_recordings_path, save_file_name)
-  if not write_object_to_json_file(recording_slots[training_settings.current_recording_slot].inputs, _path) then
+  if not write_replay_to_json_file(recording_slots[training_settings.current_recording_slot].inputs, _path) then -- Specifying replay adds newlines between replay frames in the .json; easier to read and edit
     print(string.format("Error: Failed to save recording to \"%s\"", _path))
   else
     print(string.format("Saved slot %d to \"%s\"", training_settings.current_recording_slot, _path))

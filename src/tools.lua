@@ -204,6 +204,22 @@ function write_object_to_json_file(_object, _file_path)
   return true
 end
 
+function write_replay_to_json_file(_object, _file_path)
+  local _f, _error, _code = io.open(_file_path, "w")
+  if _f == nil then
+    print(string.format("Error %d: %s", _code, _error))
+    return false
+  end
+
+  local _str = json.encode(_object, { indent = true })
+   -- Add a newline after each closing square bracket
+   _str = _str:gsub("],", "],\n")
+  _f:write(_str)
+  _f:close()
+
+  return true
+end
+
 -- log
 log_enabled = false
 log_categories_display = {}
