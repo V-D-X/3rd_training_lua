@@ -1967,16 +1967,17 @@ function set_recording_state(_input, _state)
       end
     end
 
-    _last_input = math.max(current_recording_last_idle_frame, _last_input)
+    --[[commented VDX: The four commented lines below cause there to be empty frames at the end of replays — maybe they exist
+       for good reason, but I'm commenting them out for now until it causes issues]]--
 
+    -- _last_input = math.max(current_recording_last_idle_frame, _last_input) --
     if not training_settings.auto_crop_recording_start then
       _first_input = 1
     end
-
-    if not training_settings.auto_crop_recording_end or _last_input ~= current_recording_last_idle_frame then
-      _last_input = #recording_slots[training_settings.current_recording_slot].inputs
-    end
-
+    -- if not training_settings.auto_crop_recording_end or _last_input ~= current_recording_last_idle_frame then --
+    --   _last_input = #recording_slots[training_settings.current_recording_slot].inputs
+    -- end    
+    
     local _cropped_sequence = {}
     for _i = _first_input, _last_input do
       table.insert(_cropped_sequence, recording_slots[training_settings.current_recording_slot].inputs[_i])
