@@ -107,7 +107,11 @@ function update_character_select(_input, _do_fast_forward)
 
   --print(string.format("%d, %d, %d", character_select_sequence_state, _p1_character_select_state, _p2_character_select_state))
 
-  if _p1_character_select_state > 4 and not is_in_match then
+  if match_just_loaded then
+    character_select_sequence_state = 0
+  end
+
+  if _p1_character_select_state > 4 and not is_in_match and character_select_sequence_state > 0 then
     if character_select_sequence_state == 2 then
       character_select_sequence_state = 3
     end

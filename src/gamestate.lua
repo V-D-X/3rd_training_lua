@@ -172,8 +172,8 @@ function read_game_vars()
   if _previous_is_in_match == nil then _previous_is_in_match = true end
   is_in_match = ((p1_locked == 0xFF or p2_locked == 0xFF) and match_state == 0x02);
   has_match_just_started = not _previous_is_in_match and is_in_match
+  match_just_loaded = match_state == 0x00;
 end
-
 
 function read_input(_player_obj)
 
