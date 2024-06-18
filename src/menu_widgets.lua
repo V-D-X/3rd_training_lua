@@ -8,7 +8,8 @@ gui_box_outline_color = 0x840000FF
 
 menu_y_interval = 10
 
-function gauge_menu_item(_name, _object, _property_name, _unit, _fill_color, _gauge_max, _subdivision_count)
+function gauge_menu_item(_name, _object, _property_name, _unit, _fill_color, _default_value, _gauge_max, _subdivision_count)
+  if _default_value == nil then _default_value = 0 end
   local _o = {}
   _o.name = _name
   _o.object = _object
@@ -19,6 +20,7 @@ function gauge_menu_item(_name, _object, _property_name, _unit, _fill_color, _ga
   _o.gauge_max = _gauge_max or 0
   _o.subdivision_count = _subdivision_count or 1
   _o.fill_color = _fill_color or 0x0000FFFF
+  _o.default_value = _default_value
 
   function _o:draw(_x, _y, _selected)
     local _c = text_default_color
@@ -57,7 +59,7 @@ function gauge_menu_item(_name, _object, _property_name, _unit, _fill_color, _ga
   end
 
   function _o:reset()
-    self.object[self.property_name] = 0
+    self.object[self.property_name] = self.default_value
   end
 
   function _o:legend()
@@ -756,7 +758,7 @@ function multitab_menu_draw(_menu)
 
   if not _menu.is_main_menu_selected then
     if _menu.content[_menu.main_menu_selected_index].entries[_menu.sub_menu_selected_index].legend then
-      -- Å°defaultï\é¶à íu
+      -- ÔøΩÔøΩdefaultÔøΩ\ÔøΩÔøΩÔøΩ íu
       gui.text(_menu_x + 220, _menu.bottom - 12, _menu.content[_menu.main_menu_selected_index].entries[_menu.sub_menu_selected_index]:legend(), text_disabled_color, text_default_border_color)
     end
   end
