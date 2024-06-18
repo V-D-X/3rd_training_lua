@@ -15,49 +15,49 @@ print("- In normal mode, press \"Coin\" to start/stop replay")
 print("- Lua Hotkey 1 (alt+1) to return to character select screen")
 print("")
 
--- ¡2021.11.22
---   - ”½Œ‚ƒ^ƒCƒ~ƒ“ƒO: ‹óƒuƒŒã‚ÌƒJƒEƒ“ƒ^[ƒ^ƒCƒ~ƒ“ƒO‚ğ•ÏX
---   - ƒqƒbƒgƒXƒgƒbƒvƒtƒŒ[ƒ€A‰ñ•œƒtƒŒ[ƒ€‚ğ•\¦
---   - ƒLƒƒƒ‰‚Ì’†S‚ğƒvƒ‰ƒX‚Å•\¦
--- ¡2021.11.24
---   - ‘Ì¨‚ªˆá‚¤UŒ‚‚ÍƒK[ƒh‚µ‚È‚¢ƒ‚[ƒh’Ç‰Á
+-- ï¿½ï¿½2021.11.22
+--   - ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½O: ï¿½ï¿½uï¿½ï¿½ï¿½ï¿½ÌƒJï¿½Eï¿½ï¿½ï¿½^ï¿½[ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½ï¿½ÏX
+--   - ï¿½qï¿½bï¿½gï¿½Xï¿½gï¿½bï¿½vï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½ñ•œƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
+--   - ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Ì’ï¿½ï¿½Sï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Xï¿½Å•\ï¿½ï¿½
+-- ï¿½ï¿½2021.11.24
+--   - ï¿½Ìï¿½ï¿½ï¿½ï¿½á‚¤ï¿½Uï¿½ï¿½ï¿½ÍƒKï¿½[ï¿½hï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½Ç‰ï¿½
 --     Dummy -> Blocking Style -> block_A
--- ¡2021.11.25
---   - ƒŠƒvƒŒƒC‚É¶‰E©“®”½“]‚ğs‚í‚È‚¢(disable_replay_flip)’Ç‰Á
+-- ï¿½ï¿½2021.11.25
+--   - ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Éï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½sï¿½ï¿½È‚ï¿½(disable_replay_flip)ï¿½Ç‰ï¿½
 --     Misc -> Enable replay flip
--- ¡2021.11.27
---   - Replay,Recordingƒ{ƒ^ƒ“‚ğP2.start‚ÉŠ„“–‚Ä‚½
--- ¡2021.11.27
---   - crouching‚É‹­§“I‚Éƒjƒ…[ƒgƒ‰ƒ‹‚É‚µ‚ÄQS‚ğæ‚ê‚é‚æ‚¤‚ÉC³
--- ¡2022.01.31
---   - t—í‚Ì•S—ôƒ^ƒCƒ}[•\¦ƒ‚[ƒh’Ç‰Á
+-- ï¿½ï¿½2021.11.27
+--   - Replay,Recordingï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½P2.startï¿½ÉŠï¿½ï¿½ï¿½ï¿½Ä‚ï¿½
+-- ï¿½ï¿½2021.11.27
+--   - crouchingï¿½ï¿½ï¿½É‹ï¿½ï¿½ï¿½ï¿½Iï¿½Éƒjï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½QSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½ÉCï¿½ï¿½
+-- ï¿½ï¿½2022.01.31
+--   - ï¿½tï¿½ï¿½Ì•Sï¿½ï¿½^ï¿½Cï¿½}ï¿½[ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½Ç‰ï¿½
 --     Misc -> Display Special meter
--- ¡2022.05.01
---   - ƒ‰ƒCƒt•\¦‚ğƒ_ƒ[ƒW‚Ì’l‚É•ÏX
---   - ƒXƒ^ƒ“‰ñ•œƒ[ƒ^[’Ç‰Á
---   - íŒ¸’lE‹ó’†ƒRƒ“ƒ{ƒ^ƒCƒ}[•\¦
---   - “Š‚°‹——£•\¦
--- ¡2022.05.04
---   - ƒ‰ƒCƒtİ’è’lƒƒjƒ…[’Ç‰Á
---   - ƒRƒ“ƒ{ƒ_ƒ[ƒW•\¦
--- ¡2022.05.22
---   - v0.10 ‚ğæ‚è‚ñ‚¾
---     ƒg[ƒ^ƒ‹ƒ_ƒ[ƒW•\¦‹@”\‚ª’Ç‰Á‚³‚ê‚½‚Ì‚ÅAAshtanga”Å‚Ì“¯‹@”\‚Ííœ
---   - ‚Ü‚±‚Æ‚Ì¬KˆÚ“®“‚‘‚Ì‹——£‚ğ•\¦
---   - ‚¢‚Ô‚«‚Ì’†K,‹ß‘åKˆÚ“®“Š‚°‚Ì‹——£‚ğ•\¦
--- ¡2022.06.01
---   - Misc -> Display Cancel Timing ’Ç‰Á
---   - Misc -> Cancel Mode1,2 ’Ç‰Á
--- ¡2022.08.24
+-- ï¿½ï¿½2022.05.01
+--   - ï¿½ï¿½ï¿½Cï¿½tï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½Ì’lï¿½É•ÏX
+--   - ï¿½Xï¿½^ï¿½ï¿½ï¿½ñ•œƒï¿½ï¿½[ï¿½^ï¿½[ï¿½Ç‰ï¿½
+--   - ï¿½íŒ¸ï¿½lï¿½Eï¿½ó’†ƒRï¿½ï¿½ï¿½{ï¿½^ï¿½Cï¿½}ï¿½[ï¿½\ï¿½ï¿½
+--   - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
+-- ï¿½ï¿½2022.05.04
+--   - ï¿½ï¿½ï¿½Cï¿½tï¿½İ’ï¿½lï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½Ç‰ï¿½
+--   - ï¿½Rï¿½ï¿½ï¿½{ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½\ï¿½ï¿½
+-- ï¿½ï¿½2022.05.22
+--   - v0.10 ï¿½ï¿½ï¿½ï¿½èï¿½ï¿½
+--     ï¿½gï¿½[ï¿½^ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½\ï¿½ï¿½ï¿½@ï¿½\ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Ì‚ÅAAshtangaï¿½Å‚Ì“ï¿½ï¿½@ï¿½\ï¿½Ííœ
+--   - ï¿½Ü‚ï¿½ï¿½Æ‚Ìï¿½Kï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
+--   - ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ì’ï¿½K,ï¿½ß‘ï¿½Kï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
+-- ï¿½ï¿½2022.06.01
+--   - Misc -> Display Cancel Timing ï¿½Ç‰ï¿½
+--   - Misc -> Cancel Mode1,2 ï¿½Ç‰ï¿½
+-- ï¿½ï¿½2022.08.24
 --   - add enable_distance_replay, replay_start_distance
---   - w’è‹——£‚Ü‚Å‹ß‚Ã‚­‚ÆƒŠƒvƒŒƒC‚ğŠJn‚·‚éƒ‚[ƒh‚ğ’Ç‰Á
---   - Misc -> Disctance Replay Mode ‚Å—LŒø/–³Œø‘I‘ğ
---   - Misc -> Replay start distance ‚Å‹——£‚ğİ’è
--- ¡2022.08.29
+--   - ï¿½wï¿½è‹—ï¿½ï¿½ï¿½Ü‚Å‹ß‚Ã‚ï¿½ï¿½Æƒï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½éƒ‚ï¿½[ï¿½hï¿½ï¿½Ç‰ï¿½
+--   - Misc -> Disctance Replay Mode ï¿½Å—Lï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
+--   - Misc -> Replay start distance ï¿½Å‹ï¿½ï¿½ï¿½ï¿½ï¿½İ’ï¿½
+-- ï¿½ï¿½2022.08.29
 --   - add replay_start_height
---   - w’è‚‚³‚Ü‚Å‰º~‚·‚é‚ÆƒŠƒvƒŒƒC‚ğŠJn‚·‚éƒ‚[ƒh‚ğ’Ç‰Á
---   - Misc -> Height Replay Mode  ‚Å—LŒø/–³Œø‘I‘ğ
---   - Misc -> Replay start height ‚Å‹——£‚ğİ’è
+--   - ï¿½wï¿½è‚ï¿½ï¿½ï¿½Ü‚Å‰ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½Æƒï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½éƒ‚ï¿½[ï¿½hï¿½ï¿½Ç‰ï¿½
+--   - Misc -> Height Replay Mode  ï¿½Å—Lï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
+--   - Misc -> Replay start height ï¿½Å‹ï¿½ï¿½ï¿½ï¿½ï¿½İ’ï¿½
 
 -- Kudos to indirect contributors:
 -- *esn3s* for his work on 3s frame data : http://baston.esn3s.com/
@@ -1196,7 +1196,7 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
       _animation_frame_delta = _dummy.blocking.expected_attack_animation_hit_frame - _player_relevant_animation_frame
     end
 
-    -- ƒK[ƒh
+    -- ï¿½Kï¿½[ï¿½h
     if _blocking_style == 1 or _blocking_style == 4 then
       local _blocking_delta_threshold = 2
       if _dummy.blocking.is_precise_timing then
@@ -1216,7 +1216,7 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
           _input[_dummy.prefix..' Left'] = true
         end
 
-        -- ‘Ì¨‚Æˆá‚¤‘®«‚àƒK[ƒh‚·‚é
+        -- ï¿½Ìï¿½ï¿½Æˆá‚¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½
         if _blocking_style == 1 then
           if _hit_type == 2 then
             _input[_dummy.prefix..' Down'] = true
@@ -1225,7 +1225,7 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
           end
         end
       end
-    -- ƒuƒƒbƒLƒ“ƒO
+    -- ï¿½uï¿½ï¿½ï¿½bï¿½Lï¿½ï¿½ï¿½O
     elseif _blocking_style == 2 then
       _input[_dummy.prefix..' Right'] = false
       _input[_dummy.prefix..' Left'] = false
@@ -1259,7 +1259,7 @@ end
 function update_fast_wake_up(_input, _player, _dummy, _mode)
   if is_in_match and _mode ~= 1 and current_recording_state ~= 4 then
     --local _should_tap_down = _dummy.previous_can_fast_wakeup == 0 and _dummy.can_fast_wakeup == 1
-    -- ¡QS‚É‹­§“I‚Éƒjƒ…[ƒgƒ‰ƒ‹‚ğ“ü‚ê‚é
+    -- ï¿½ï¿½QSï¿½ï¿½ï¿½É‹ï¿½ï¿½ï¿½ï¿½Iï¿½Éƒjï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     local _should_tap_neutral = _dummy.previous_can_fast_wakeup  == 0 and _dummy.can_fast_wakeup == 1
     local _should_tap_down    = _dummy.previous_can_fast_wakeup2 == 0 and _dummy.previous_can_fast_wakeup == 1
 
@@ -1298,13 +1298,9 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
 
       _defender.counter.recording_slot = _slot_index
 
-      local _delay = recording_slots[_defender.counter.recording_slot].delay or 0
+      local _delay = recording_slots[_defender.counter.recording_slot].delay - 1 or 0 --counteracts the +1 added in _defender.has_just_started_wake_up; removing the +1 causes regular counterattacks to be early
       local _random_deviation = recording_slots[_defender.counter.recording_slot].random_deviation or 0
-      if _random_deviation <= 0 then
-        _random_deviation = math.ceil(math.random(_random_deviation - 1, 0))
-      else
-        _random_deviation = math.floor(math.random(0, _random_deviation + 1))
-      end
+      _random_deviation = math.floor(math.random(0, _random_deviation))
       if _debug then
         print(string.format("frame offset: %d", _delay + _random_deviation))
       end
@@ -1317,7 +1313,7 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
       print(frame_number.." - init ca (parry)")
     end
     log(_defender.prefix, "counter_attack", "init ca (parry)")
-    -- ¡”½Œ‚ƒ^ƒCƒ~ƒ“ƒO
+    -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½O
     if _defender.pos_y > 0 then
       _defender.counter.attack_frame = frame_number + 19
     else
@@ -1672,7 +1668,7 @@ end
 p2_stun_reset_value_gauge_item.is_disabled = p1_stun_reset_value_gauge_item.is_disabled
 stun_reset_delay_item.is_disabled = p1_stun_reset_value_gauge_item.is_disabled
 
--- ¡add ashtanga
+-- ï¿½ï¿½add ashtanga
 distance_replay_item = integer_menu_item("  Replay start distance", training_settings, "replay_start_distance", 1, 200, false, 100)
 distance_replay_item.is_disabled = function()
   return training_settings.enable_distance_replay ~= true
@@ -2374,7 +2370,7 @@ function before_frame()
   -- counter attack
   update_counter_attack(_input, player, dummy, training_settings.counter_attack_stick, training_settings.counter_attack_button)
 
-  -- ‹——£‚ÅPlayingŠJn add ashtanga
+  -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Playingï¿½Jï¿½n add ashtanga
   if training_settings.enable_distance_replay == true and is_in_match then
     distance_char_old = distance_char
     distance_char     = math.abs(player_objects[1].pos_x - player_objects[2].pos_x)
@@ -2497,8 +2493,8 @@ function before_frame()
 
   -- add ashtanga
   if((training_settings.cancel_mode1 ~= 1) or (training_settings.cancel_mode2 ~= 1)) then
-    memory.writebyte(0x02068E8D, (training_settings.cancel_mode1 - 1) + (training_settings.cancel_mode2 - 1) * 0x20) -- 1P FXƒLƒƒƒ“ƒZƒ‹
-    memory.writebyte(0x02069325, (training_settings.cancel_mode1 - 1) + (training_settings.cancel_mode2 - 1) * 0x20) -- 2P FXƒLƒƒƒ“ƒZƒ‹
+    memory.writebyte(0x02068E8D, (training_settings.cancel_mode1 - 1) + (training_settings.cancel_mode2 - 1) * 0x20) -- 1P ï¿½Fï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½
+    memory.writebyte(0x02069325, (training_settings.cancel_mode1 - 1) + (training_settings.cancel_mode2 - 1) * 0x20) -- 2P ï¿½Fï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½
   end
 
   log_update()
@@ -2526,7 +2522,7 @@ function on_gui()
     display_draw_printed_geometry()
 
 
-    -- ƒRƒ“ƒ{ƒ_ƒ[ƒW—ÊŒvZ
+    -- ï¿½Rï¿½ï¿½ï¿½{ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½ÊŒvï¿½Z
     local _damage_freeze_cnt_p1_zero_edge = false
     local _damage_freeze_cnt_p2_zero_edge = false
     if((damage_freeze_cnt_p1 ~= 0) and (memory.readbyte(0x02068DF3) == 0)) then
@@ -2535,7 +2531,7 @@ function on_gui()
     if((damage_freeze_cnt_p2 ~= 0) and (memory.readbyte(0x0206928B) == 0)) then
       _damage_freeze_cnt_p2_zero_edge = true
     end
-    -- ƒRƒ“ƒ{‚ª0 ‚Ü‚½‚Í ‚Ì‚¯‚¼‚èƒJƒEƒ“ƒ^‚ª0‚Æ‚È‚Á‚½‚Æ‚«‚É‰Šú‰»
+    -- ï¿½Rï¿½ï¿½ï¿½{ï¿½ï¿½0 ï¿½Ü‚ï¿½ï¿½ï¿½ ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½^ï¿½ï¿½0ï¿½Æ‚È‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½
     if((_damage_freeze_cnt_p1_zero_edge == true) or (memory.readbyte(0x0206961D) == 0)) then
       player_objects[1].combo_start_life = player_objects[1].life
     elseif(memory.readbyte(0x0206961D) >= 1) then
@@ -2957,7 +2953,7 @@ function on_gui()
     menu_stack_clear()
   end
 
-  -- ¡’Ç‰Á•\¦—p‚ÌŠÖ”
+  -- ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½\ï¿½ï¿½ï¿½pï¿½ÌŠÖï¿½
   function disp_special(_player, _x, _y)
     local _y_offset = 0
 
@@ -2986,7 +2982,7 @@ function on_gui()
     local _gauge_background_color = 0xD6E7EF77
     local _gauge_cooldown_fill_color = 0xFF9939FF
 
-    -- t—í
+    -- ï¿½tï¿½ï¿½
     if _player.char_str == "chunli" then
       for i = 1, memory.readbyte(hyaku_addr0), 1 do
         gui.image(_x + (i-1)*10, _y +  0 + _y_offset, img_LK_button_small)
@@ -3000,7 +2996,7 @@ function on_gui()
       --draw_gauge(_x,       _y + _y_offset + 20, 98, 3, memory.readbyte(hyaku_time)/98, _gauge_cooldown_fill_color, _gauge_background_color, nil, true)
       draw_gauge(_x,       _y + _y_offset + 20, 98, 3, memory.readbyte(hyaku_time)/98, _gauge_cooldown_fill_color, _gauge_background_color, nil, true)
       gui.text  (_x + 103, _y + _y_offset + 20, string.format("%d", memory.readbyte(hyaku_time),  0x00C080FF, 0x000000FF))
-    -- ƒŠƒ…ƒE•“dn
+    -- ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½dï¿½n
     elseif((_player.char_str == "ryu") and (memory.readbyte(super_art) == 2))then
       --  3  8..0
       --  9 24..1
@@ -3029,7 +3025,7 @@ function on_gui()
       gui.box   (_x - 2 + 81, yb -  3, _x + 81, yb + 3, 0xFFFFFFFF, 0x00000000)
       gui.text  (_x,          yb +  7, string.format("%d", _tame,  0x00C080FF, 0x000000FF))
       --gui.text  (_x,          yb + 17, string.format("%d", _phase, 0x00C080FF, 0x000000FF))
-    -- ‚Ü‚±‚Æ
+    -- ï¿½Ü‚ï¿½ï¿½ï¿½
     elseif(_player.char_str == "makoto") then
       local _tame
       local _level
@@ -3063,20 +3059,20 @@ function on_gui()
 
   if is_in_match == true then
     ------------------------
-    -- À•W
+    -- ï¿½ï¿½ï¿½W
     ------------------------
-    -- ƒXƒe[ƒW‘S‘Ì‚Å‚ÌÀ•W‚ğæ“¾
+    -- ï¿½Xï¿½eï¿½[ï¿½Wï¿½Sï¿½Ì‚Å‚Ìï¿½ï¿½Wï¿½ï¿½ï¿½æ“¾
     local P1_pos_x = memory.readword(0x02068CD0)
     local P1_pos_y = memory.readword(0x02068CD4)
     local P2_pos_x = memory.readword(0x02069168)
     local P2_pos_y = memory.readword(0x0206916C)
   
-    -- ‰æ–Êã‚Ì‘Š‘Î“I‚ÈˆÊ’u‚ÌÀ•W‚ğæ“¾
+    -- ï¿½ï¿½Êï¿½Ì‘ï¿½ï¿½Î“Iï¿½ÈˆÊ’uï¿½Ìï¿½ï¿½Wï¿½ï¿½ï¿½æ“¾
     local P1_px, P1_py = game_to_screen_space(P1_pos_x, P1_pos_y)
     local P2_px, P2_py = game_to_screen_space(P2_pos_x, P2_pos_y)
 
-    -- ¡ƒXƒyƒVƒƒƒ‹ƒQ[ƒW‚Ì•\¦
-    -- CPS3 384~224
+    -- ï¿½ï¿½ï¿½Xï¿½yï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½Wï¿½Ì•\ï¿½ï¿½
+    -- CPS3 384ï¿½~224
     if  training_settings.enable_special_meter == true then
       if(P1.char_str == "ryu") then
         disp_special(P1,  26, 58)
@@ -3091,7 +3087,7 @@ function on_gui()
       end
     end
 
-    -- ƒXƒ^ƒ“‰ñ•œƒ[ƒ^[•\¦
+    -- ï¿½Xï¿½^ï¿½ï¿½ï¿½ñ•œƒï¿½ï¿½[ï¿½^ï¿½[ï¿½\ï¿½ï¿½
     if training_settings.enable_stun_meter == true then
       p1_stun_state = memory.readbyte(P1.stun_status)
       p2_stun_state = memory.readbyte(P2.stun_status)
@@ -3124,7 +3120,7 @@ function on_gui()
       p2_stun_state_cur = p2_stun_state
     end
   
-    -- íŒ¸’l•\¦
+    -- ï¿½íŒ¸ï¿½lï¿½\ï¿½ï¿½
     if training_settings.enable_aircombo_meter == true then
       local _x = 133
       local _y = 44
@@ -3148,124 +3144,124 @@ function on_gui()
       draw_vertical_line(_x+(121-  2), _y-2, _y+2, 0xFFFFFF80, 1)
     end
 
-    -- ˆÚ“®“Š‚°(‹óƒLƒƒƒ“ƒZƒ‹“Š‚°)
+    -- ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
     function disp_throw_distance(_p1, _p2)
       local _throw = {}
       if    (_p1.char_str == "gill") then
-        _throw[ #_throw + 1 ]  = 28      -- gill:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 28      -- gill:ï¿½Êí“Šï¿½ï¿½
       elseif(_p1.char_str == "alex") then
-        _throw[ #_throw + 1 ]  = 30      -- alex:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 30      -- alex:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 30 + 16 -- alex:6‘åP
+        _throw[ #_throw + 1 ]  = 30 + 16 -- alex:6ï¿½ï¿½P
       elseif(_p1.char_str == "ryu") then
-        _throw[ #_throw + 1 ]  = 24      -- ryu:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 24      -- ryu:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 24 + 16 -- ryu:6’†P
+        _throw[ #_throw + 1 ]  = 24 + 16 -- ryu:6ï¿½ï¿½P
       elseif(_p1.char_str == "yun") then
-        _throw[ #_throw + 1 ]  = 18      -- yun:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 18      -- yun:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 31      -- yun:‘O•û“]g
+        _throw[ #_throw + 1 ]  = 31      -- yun:ï¿½Oï¿½ï¿½ï¿½]ï¿½g
       elseif(_p1.char_str == "dudley") then
-        _throw[ #_throw + 1 ]  = 20      -- dudley:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 20      -- dudley:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 20 + 10 -- dudley:6’†P
-        _throw[ #_throw + 1 ]  = 20 + 11 -- dudley:6‘åK
-        _throw[ #_throw + 1 ]  = 20 + 12 -- dudley:6¬P
+        _throw[ #_throw + 1 ]  = 20 + 10 -- dudley:6ï¿½ï¿½P
+        _throw[ #_throw + 1 ]  = 20 + 11 -- dudley:6ï¿½ï¿½K
+        _throw[ #_throw + 1 ]  = 20 + 12 -- dudley:6ï¿½ï¿½P
       elseif(_p1.char_str == "necro") then
-        _throw[ #_throw + 1 ]  = 26      -- necro:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 26      -- necro:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 26 + 8  -- necro:4‘åK
+        _throw[ #_throw + 1 ]  = 26 + 8  -- necro:4ï¿½ï¿½K
       elseif(_p1.char_str == "hugo") then
-        _throw[ #_throw + 1 ]  = 32      -- hugo:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 32      -- hugo:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 59      -- hugo:¬ƒ€[ƒ“
-        _throw[ #_throw + 1 ]  = 53      -- hugo:’†ƒ€[ƒ“
-        _throw[ #_throw + 1 ]  = 47      -- hugo:‘åƒ€[ƒ“
+        _throw[ #_throw + 1 ]  = 59      -- hugo:ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 53      -- hugo:ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 47      -- hugo:ï¿½åƒ€ï¿½[ï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 70      -- hugo:ƒMƒKƒX
+        _throw[ #_throw + 1 ]  = 70      -- hugo:ï¿½Mï¿½Kï¿½X
       elseif(_p1.char_str == "ibuki") then
-        _throw[ #_throw + 1 ]  = 16      -- ibuki:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 16      -- ibuki:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 16 + 4  -- ibuki:’†KE‹ß‘åK
+        _throw[ #_throw + 1 ]  = 16 + 4  -- ibuki:ï¿½ï¿½Kï¿½Eï¿½ß‘ï¿½K
       elseif(_p1.char_str == "elena") then
-        _throw[ #_throw + 1 ]  = 22      -- elena:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 22      -- elena:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 22 + 28 -- elena:6’†K
+        _throw[ #_throw + 1 ]  = 22 + 28 -- elena:6ï¿½ï¿½K
       elseif(_p1.char_str == "oro") then
-        _throw[ #_throw + 1 ]  = 25      -- oro:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 25      -- oro:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 25 + 12 -- oro:6’†P
-        _throw[ #_throw + 1 ]  = 25 + 14 -- oro:‘åK
-        _throw[ #_throw + 1 ]  = 25 + 28 -- oro:‰“’†K
+        _throw[ #_throw + 1 ]  = 25 + 12 -- oro:6ï¿½ï¿½P
+        _throw[ #_throw + 1 ]  = 25 + 14 -- oro:ï¿½ï¿½K
+        _throw[ #_throw + 1 ]  = 25 + 28 -- oro:ï¿½ï¿½ï¿½ï¿½K
       elseif(_p1.char_str == "yang") then
-        _throw[ #_throw + 1 ]  = 18      -- yang:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 18      -- yang:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 18 + 13 -- yang:‘åK
+        _throw[ #_throw + 1 ]  = 18 + 13 -- yang:ï¿½ï¿½K
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 31      -- yang:‘O•û“]g
+        _throw[ #_throw + 1 ]  = 31      -- yang:ï¿½Oï¿½ï¿½ï¿½]ï¿½g
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 31 + 13 -- yang:‘åK + ‘O•û“]g
+        _throw[ #_throw + 1 ]  = 31 + 13 -- yang:ï¿½ï¿½K + ï¿½Oï¿½ï¿½ï¿½]ï¿½g
       elseif(_p1.char_str == "ken") then
-        _throw[ #_throw + 1 ]  = 24      -- ken:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 24      -- ken:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 24 + 10 -- ken:4’†K
-        _throw[ #_throw + 1 ]  = 24 + 13 -- ken:‹ü’†KA‹ü‘åK
+        _throw[ #_throw + 1 ]  = 24 + 10 -- ken:4ï¿½ï¿½K
+        _throw[ #_throw + 1 ]  = 24 + 13 -- ken:ï¿½ï¿½ï¿½ï¿½Kï¿½Aï¿½ï¿½ï¿½ï¿½K
       elseif(_p1.char_str == "sean") then
-        _throw[ #_throw + 1 ]  = 20      -- sean:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 20      -- sean:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 20 + 14 -- sean:6‘åP
+        _throw[ #_throw + 1 ]  = 20 + 14 -- sean:6ï¿½ï¿½P
       elseif(_p1.char_str == "urien") then
-        _throw[ #_throw + 1 ]  = 26      -- urien:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 26      -- urien:ï¿½Êí“Šï¿½ï¿½
       elseif(_p1.char_str == "gouki") then
-        _throw[ #_throw + 1 ]  = 24      -- gouki:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 24      -- gouki:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 24 + 20 -- gouki:6’†P
+        _throw[ #_throw + 1 ]  = 24 + 20 -- gouki:6ï¿½ï¿½P
       elseif(_p1.char_str == "chunli") then
-        _throw[ #_throw + 1 ]  = 26      -- chunli:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 26      -- chunli:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 26 + 16 -- chunli:‹ß‘åK
-        _throw[ #_throw + 1 ]  = 26 + 32 -- chunli:‰“’†K
+        _throw[ #_throw + 1 ]  = 26 + 16 -- chunli:ï¿½ß‘ï¿½K
+        _throw[ #_throw + 1 ]  = 26 + 32 -- chunli:ï¿½ï¿½ï¿½ï¿½K
       elseif(_p1.char_str == "makoto") then
-        _throw[ #_throw + 1 ]  = 20      -- makoto:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 20      -- makoto:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 20 + 13 -- makoto:‹ü‘åK
+        _throw[ #_throw + 1 ]  = 20 + 13 -- makoto:ï¿½ï¿½ï¿½ï¿½K
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 39      -- makoto:¬“‚‘
-        _throw[ #_throw + 1 ]  = 43      -- makoto:’†“‚‘
-        _throw[ #_throw + 1 ]  = 47      -- makoto:‘å“‚‘
+        _throw[ #_throw + 1 ]  = 39      -- makoto:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 43      -- makoto:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 47      -- makoto:ï¿½å“‚ï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 39 + 13 -- makoto:‹ü‘åK + ¬“‚‘
-        _throw[ #_throw + 1 ]  = 43 + 13 -- makoto:‹ü‘åK + ’†“‚‘
-        _throw[ #_throw + 1 ]  = 47 + 13 -- makoto:‹ü‘åK + ‘å“‚‘
+        _throw[ #_throw + 1 ]  = 39 + 13 -- makoto:ï¿½ï¿½ï¿½ï¿½K + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 43 + 13 -- makoto:ï¿½ï¿½ï¿½ï¿½K + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 47 + 13 -- makoto:ï¿½ï¿½ï¿½ï¿½K + ï¿½å“‚ï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 39 + 41 -- makoto:—§‚¿¬K + ¬“‚‘
-        _throw[ #_throw + 1 ]  = 43 + 41 -- makoto:—§‚¿¬K + ’†“‚‘
-        _throw[ #_throw + 1 ]  = 47 + 41 -- makoto:—§‚¿¬K + ‘å“‚‘
+        _throw[ #_throw + 1 ]  = 39 + 41 -- makoto:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½K + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 43 + 41 -- makoto:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½K + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _throw[ #_throw + 1 ]  = 47 + 41 -- makoto:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½K + ï¿½å“‚ï¿½ï¿½
       elseif(_p1.char_str == "q") then
-        _throw[ #_throw + 1 ]  = 24      -- q:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 24      -- q:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 24 + 14 -- q:‹ü’†P
-        _throw[ #_throw + 1 ]  = 24 + 25 -- q:’†P
-        _throw[ #_throw + 1 ]  = 24 + 36 -- q:4’†P
+        _throw[ #_throw + 1 ]  = 24 + 14 -- q:ï¿½ï¿½ï¿½ï¿½P
+        _throw[ #_throw + 1 ]  = 24 + 25 -- q:ï¿½ï¿½P
+        _throw[ #_throw + 1 ]  = 24 + 36 -- q:4ï¿½ï¿½P
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 85      -- q:¬•ßŠl
-        _throw[ #_throw + 1 ]  = 87      -- q:’†•ßŠl
-        _throw[ #_throw + 1 ]  = 89      -- q:‘å•ßŠl
+        _throw[ #_throw + 1 ]  = 85      -- q:ï¿½ï¿½ï¿½ßŠl
+        _throw[ #_throw + 1 ]  = 87      -- q:ï¿½ï¿½ï¿½ßŠl
+        _throw[ #_throw + 1 ]  = 89      -- q:ï¿½ï¿½ßŠl
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 103     -- q:‹ü’†P + ‘å•ßŠl
-        _throw[ #_throw + 1 ]  = 114     -- q:’†P   + ‘å•ßŠl
-        _throw[ #_throw + 1 ]  = 125     -- q:4’†P  + ‘å•ßŠl
+        _throw[ #_throw + 1 ]  = 103     -- q:ï¿½ï¿½ï¿½ï¿½P + ï¿½ï¿½ßŠl
+        _throw[ #_throw + 1 ]  = 114     -- q:ï¿½ï¿½P   + ï¿½ï¿½ßŠl
+        _throw[ #_throw + 1 ]  = 125     -- q:4ï¿½ï¿½P  + ï¿½ï¿½ßŠl
       elseif(_p1.char_str == "twelve") then
-        _throw[ #_throw + 1 ]  = 22      -- twelve:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 22      -- twelve:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 22 + 20 -- twelve:‰“’†P
+        _throw[ #_throw + 1 ]  = 22 + 20 -- twelve:ï¿½ï¿½ï¿½ï¿½P
       elseif(_p1.char_str == "remy") then
-        _throw[ #_throw + 1 ]  = 24      -- remy:’Êí“Š‚°
+        _throw[ #_throw + 1 ]  = 24      -- remy:ï¿½Êí“Šï¿½ï¿½
         _throw[ #_throw + 1 ]  = 0
-        _throw[ #_throw + 1 ]  = 24 + 14 -- remy:‹ß’†P
-        _throw[ #_throw + 1 ]  = 24 + 16 -- remy:6’†K
-        _throw[ #_throw + 1 ]  = 24 + 21 -- remy:‰“’†P
-        _throw[ #_throw + 1 ]  = 24 + 27 -- remy:‰“‘åK
+        _throw[ #_throw + 1 ]  = 24 + 14 -- remy:ï¿½ß’ï¿½P
+        _throw[ #_throw + 1 ]  = 24 + 16 -- remy:6ï¿½ï¿½K
+        _throw[ #_throw + 1 ]  = 24 + 21 -- remy:ï¿½ï¿½ï¿½ï¿½P
+        _throw[ #_throw + 1 ]  = 24 + 27 -- remy:ï¿½ï¿½ï¿½ï¿½K
       end
 
       local _distance = math.abs(P1_px - P2_px)
@@ -3301,7 +3297,7 @@ function on_gui()
             local _px
             local _py
             local _hy
-            -- ƒvƒŒƒCƒ„[‚ÌˆÊ’u
+            -- ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌˆÊ’u
             if( _p1.id == 1 ) then
               _px = P1_px
               _py = P1_py
@@ -3318,10 +3314,10 @@ function on_gui()
               _color = 0xFF0000CC
             end
 
-            -- ‰EŒü‚«
+            -- ï¿½Eï¿½ï¿½ï¿½ï¿½
             if(_p1.flip_x == 1) then
               draw_horizontal_line(_px + _p1_push_width + 1,           _px + _p1_push_width + _throw[ i ], _py+i-_hy, _color, 1)
-            -- ¶Œü‚«
+            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             else
               draw_horizontal_line(_px - _p1_push_width - _throw[ i ], _px - _p1_push_width - 1,           _py+i-_hy, _color, 1)
             end
@@ -3407,7 +3403,7 @@ function on_gui()
     end
   end -- is_in_match
 
-  -- ƒƒjƒ…[•\¦
+  -- ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½\ï¿½ï¿½
   if is_menu_open then
     local _horizontal_autofire_rate = 4
     local _vertical_autofire_rate = 4
