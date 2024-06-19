@@ -732,6 +732,24 @@ function read_player_vars(_player_obj)
     _player_obj.idle_time = 0
   end
 
+  --idle display timer (refactor at some point? don't think it belongs here)
+  _player_obj.idle_display_timer = _player_obj.idle_display_timer or 0
+  _player_obj.previous_idle_time = _player_obj.previous_idle_time or 0
+  _player_obj.idle_display_jump_delay = _player_obj.idle_display_jump_delay or 30
+
+  if _player_obj.is_idle then
+    _player_obj.previous_idle_time = _player_obj.idle_time
+    _player_obj.idle_display_jump_delay = _player_obj.idle_display_jump_delay + 1
+    if _player_obj.idle_display_jump_delay > 25 then
+      _player_obj.idle_display_timer = _player_obj.idle_time
+    end
+  else
+    _player_obj.idle_display_timer = _player_obj.previous_idle_time
+    if _player_obj.is_in_jump_startup then
+      _player_obj.idle_display_jump_delay = 0
+    end
+  end
+
   if _previous_is_idle ~= _player_obj.is_idle then
     log(_player_obj.prefix, "fight", string.format("idle %d", to_bit(_player_obj.is_idle)))
   end

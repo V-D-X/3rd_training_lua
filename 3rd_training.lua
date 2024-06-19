@@ -525,6 +525,11 @@ height_replay_mode = {
   "fall",
 }
 
+idle_display_timer_mode = {
+  "off",
+  "on",
+}
+
 function make_recording_slot()
   return {
     inputs = {},
@@ -1616,6 +1621,7 @@ training_settings = {
   display_p2_input_history = false,
   attack_data_mode = 1,
   frame_advantage_display_mode = 1,
+  display_idle_timer = false,
   display_hitboxes = false,
   display_distances = false,
   display_character_subpixel_coordinate = false,
@@ -1655,6 +1661,8 @@ training_settings = {
   height_replay_mode = 1,
   replay_start_distance = 100,
   replay_start_height = 70,
+
+  idle_display_timer_mode = 1,
 }
 
 debug_settings = {
@@ -1801,6 +1809,7 @@ main_menu = make_multitab_menu(
         display_p2_input_history_item,
         list_menu_item("Display Damage Info", training_settings, "attack_data_mode", attack_data_mode),
         list_menu_item("Display Frame Advantage", training_settings, "frame_advantage_display_mode", frame_advantage_display_mode),
+        checkbox_menu_item("Display Idle Timer", training_settings, "display_idle_timer"),
         checkbox_menu_item("Display Hitboxes", training_settings, "display_hitboxes"),
         checkbox_menu_item("Display Distances", training_settings, "display_distances"),
         mid_distance_height_item,
@@ -2660,6 +2669,12 @@ function on_gui()
     -- move advantage
     if training_settings.frame_advantage_display_mode ~= 1 then
       frame_advantage_display()
+    end
+
+	 -- idle display
+    if training_settings.display_idle_timer == true and is_in_match then
+      gui.text(50, 201, "Idle time: " .. player_objects[1].idle_display_timer)
+      gui.text(282, 201, "Idle time: " .. player_objects[2].idle_display_timer)
     end
 
     -- debug
