@@ -284,11 +284,15 @@ function display_draw_distances(_p1_object, _p2_object, _mid_distance_height, _p
   local _p2_screen_x, _p2_screen_y = game_to_screen_space(_p2_object.pos_x, _p2_object.pos_y)
   draw_point(_p1_screen_x, _p1_screen_y, _line_color)
   draw_point(_p2_screen_x, _p2_screen_y, _line_color)
-  if training_settings.display_character_subpixel_coordinate == true then --edited VDX
+  if training_settings.display_character_subpixel_coordinate == true then
     gui.text(_p1_screen_x - 25, _p1_screen_y + 2, string.format("%d ( %d ):%d", _p1_object.pos_x, _p1_object.pos_xcounter, _p1_object.pos_y), text_default_color, text_default_border_color)
     gui.text(_p2_screen_x - 25, _p2_screen_y + 2, string.format("%d ( %d ):%d", _p2_object.pos_x, _p2_object.pos_xcounter, _p2_object.pos_y), text_default_color, text_default_border_color)
   else
     gui.text(_p1_screen_x + 3, _p1_screen_y + 2, string.format("%d:%d", _p1_object.pos_x, _p1_object.pos_y), text_default_color, text_default_border_color)
     gui.text(_p2_screen_x + 3, _p2_screen_y + 2, string.format("%d:%d", _p2_object.pos_x, _p2_object.pos_y), text_default_color, text_default_border_color)
   end
+end
+
+function display_draw_digital_clock()
+  gui.text(9, 5, os.date("%X"), text_default_color, text_default_border_color)   
 end

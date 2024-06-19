@@ -1663,6 +1663,7 @@ training_settings = {
   replay_start_height = 70,
 
   idle_display_timer_mode = 1,
+  display_digital_clock = false,
 }
 
 debug_settings = {
@@ -1873,6 +1874,8 @@ main_menu = make_multitab_menu(
 
         list_menu_item("Height Replay Mode", training_settings, "height_replay_mode", height_replay_mode),
         height_replay_item,
+
+        checkbox_menu_item("Display Local Time", training_settings, "display_digital_clock")
       }
     },
   },
@@ -2658,6 +2661,11 @@ function on_gui()
       local _p2 = make_input_history_entry("P2", _i)
       draw_controller_big(_p1, 44, 34)
       draw_controller_big(_p2, 310, 34)
+    end
+
+    --digital clock
+    if training_settings.display_digital_clock then
+      display_draw_digital_clock() 
     end
 
     -- attack data
