@@ -525,6 +525,13 @@ height_replay_mode = {
   "fall",
 }
 
+random_position_mode = {
+  "disable",
+  "P1",
+  "P2",
+  "P1+P2",
+}
+
 idle_display_timer_mode = {
   "off",
   "on",
@@ -1663,6 +1670,9 @@ training_settings = {
   replay_start_height = 70,
 
   idle_display_timer_mode = 1,
+  random_position_mode = 1,
+  load_distance_variation = 1, 
+  character_midpoint_variation = 1,
   display_digital_clock = false,
 }
 
@@ -1718,6 +1728,16 @@ p1_meter_gauge_item.is_disabled = function()
 end
 p2_meter_gauge_item.is_disabled = p1_meter_gauge_item.is_disabled
 meter_refill_delay_item.is_disabled = p1_meter_gauge_item.is_disabled
+
+random_distance_on_load_item = integer_menu_item("  Character distance variation", training_settings, "load_distance_variation", 0, 250, false, 0, 1)
+random_distance_on_load_item.is_disabled = function()
+  return training_settings.random_position_mode == 1
+end
+
+character_midpoint_variation_item = integer_menu_item("  Screen position variation", training_settings, "character_midpoint_variation", 0, 800, false, 0, 1)
+character_midpoint_variation_item.is_disabled = function()
+  return training_settings.random_position_mode == 1
+end
 
 slot_weight_item = integer_menu_item("Weight", nil, "weight", 0, 100, false, 1)
 counter_attack_delay_item = integer_menu_item("Counter-attack delay", nil, "delay", -40, 40, false, 0)
@@ -1875,7 +1895,11 @@ main_menu = make_multitab_menu(
         list_menu_item("Height Replay Mode", training_settings, "height_replay_mode", height_replay_mode),
         height_replay_item,
 
-        checkbox_menu_item("Display Local Time", training_settings, "display_digital_clock")
+        list_menu_item("Random Position On Load", training_settings, "random_position_mode", random_position_mode),
+        random_distance_on_load_item,
+        character_midpoint_variation_item,
+
+        checkbox_menu_item("Display Local Time", training_settings, "display_digital_clock"),
       }
     },
   },
@@ -2289,6 +2313,51 @@ function on_load_state()
   clear_input_history()
   clear_printed_geometry()
   emu.speedmode("normal")
+
+  if training_settings.random_position_mode ~= 1 and is_in_match then
+
+    local _p1_x_pos_address = P1.base + 0x64
+    local _p2_x_pos_address = P2.base + 0x64
+    local _random_distance_1 = math.random(0, training_settings.load_distance_variation)
+    local _random_distance_2 = math.random(0, training_settings.load_distance_variation)
+    local _max_midpoint_variation = training_settings.character_midpoint_variation
+    local _random_midpoint_offset = math.random(-_max_midpoint_variation, _max_midpoint_variation)
+    
+    local _p1_x_pos = memory.readword(_p1_x_pos_address)
+    local _p2_x_pos = memory.readword(_p2_x_pos_address)
+    memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_midpoint_offset)
+    memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_midpoint_offset)
+    _p1_x_pos = memory.readword(_p1_x_pos_address)
+    _p2_x_pos = memory.readword(_p2_x_pos_address)
+
+    local _players_relative_position = _p2_x_pos - _p1_x_pos
+
+    if training_settings.random_position_mode == 2 then
+      if _players_relative_position > 0 then
+        memory.writeword(_p1_x_pos_address, _p1_x_pos - _random_distance_1)
+      else
+        memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_distance_1)
+      end
+    end
+
+    if training_settings.random_position_mode == 3 then
+      if _players_relative_position > 0 then
+        memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_distance_2)
+      else
+        memory.writeword(_p2_x_pos_address, _p2_x_pos - _random_distance_2)
+      end
+    end
+
+    if training_settings.random_position_mode == 4 then
+      if _players_relative_position > 0 then
+        memory.writeword(_p1_x_pos_address, _p1_x_pos - _random_distance_2)
+        memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_distance_2)
+      else
+        memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_distance_2)
+        memory.writeword(_p2_x_pos_address, _p2_x_pos - _random_distance_2)
+      end
+    end
+  end
 end
 
 function on_start()
