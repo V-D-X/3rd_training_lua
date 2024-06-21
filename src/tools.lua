@@ -429,3 +429,7 @@ function log_state(_obj, _names)
   end
   print(_str)
 end
+
+function dbprint(_param) --good ol print statements. nothing beats that
+  print(_param)
+end

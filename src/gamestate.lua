@@ -61,6 +61,8 @@ function reset_player_objects()
   P1 = player_objects[1]
   P2 = player_objects[2]
 
+  P1.pos_x_addr = 0x02068CD0
+  P1.pos_xcounter = P1.pos_x_addr + 0x2
   P1.gauge_addr = 0x020695B5
   P1.meter_addr = { 0x020286AB, 0x020695BF } -- 2nd address is the master variable
   P1.stun_status = 0x020695F4
@@ -93,6 +95,8 @@ function reset_player_objects()
   P1.hyaku_addr1  = 0x02025A05 -- [ashtanga] Chun_hyaku
   P1.hyaku_addr2  = 0x02025A07 -- [ashtanga] Chun_hyaku
 
+  P2.pos_x_addr = 0x02069168
+  P2.pos_xcounter_addr = P2.pos_x_addr + 0x02
   P2.gauge_addr = 0x020695E1
   P2.meter_addr = { 0x020286DF, 0x020695EB} -- 2nd address is the master variable
   P2.stun_status = 0x02069608

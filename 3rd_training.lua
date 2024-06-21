@@ -1617,7 +1617,7 @@ training_settings = {
   p1_meter = 0,
   p2_meter = 0,
   infinite_sa_time = false,
-  stun_mode = 2,
+  stun_mode = 3,
   p1_stun_reset_value = 0,
   p2_stun_reset_value = 0,
   stun_reset_delay = 20,
@@ -1671,8 +1671,8 @@ training_settings = {
 
   idle_display_timer_mode = 1,
   random_position_mode = 1,
-  load_distance_variation = 1, 
-  character_midpoint_variation = 1,
+  load_distance_variation = 0, 
+  character_midpoint_variation = 0,
   display_digital_clock = false,
 }
 
@@ -1823,7 +1823,7 @@ main_menu = make_multitab_menu(
     {
       name = "Display",
       entries = {
-        checkbox_menu_item("Display Controllers", training_settings, "display_input"),
+        checkbox_menu_item("Display Controllers", training_settings, "display_input", 2),
         checkbox_menu_item("Display Gauges Numbers", training_settings, "display_gauges"),
         checkbox_menu_item("Display P1 Input History", training_settings, "display_p1_input_history"),
         checkbox_menu_item("Dynamic P1 Input History", training_settings, "display_p1_input_history_dynamic"),
@@ -2295,6 +2295,8 @@ end
 
 function on_load_state()
   reset_player_objects()
+  read_game_object(player_objects[1])
+  read_game_object(player_objects[2])
   attack_data_reset()
   frame_advantage_reset()
 
@@ -2316,45 +2318,41 @@ function on_load_state()
 
   if training_settings.random_position_mode ~= 1 and is_in_match then
 
-    local _p1_x_pos_address = P1.base + 0x64
-    local _p2_x_pos_address = P2.base + 0x64
-    local _random_distance_1 = math.random(0, training_settings.load_distance_variation)
-    local _random_distance_2 = math.random(0, training_settings.load_distance_variation)
+    local _random_distance_single_character = math.random(0, training_settings.load_distance_variation)
     local _max_midpoint_variation = training_settings.character_midpoint_variation
     local _random_midpoint_offset = math.random(-_max_midpoint_variation, _max_midpoint_variation)
+
+    memory.writeword(P1.pos_x_addr, P1.pos_x + _random_midpoint_offset) --randomized midpoint between characters
+    memory.writeword(P2.pos_x_addr, P2.pos_x + _random_midpoint_offset)
+    P1.pos_x = memory.readword(P1.pos_x_addr)
+    P2.pos_x = memory.readword(P2.pos_x_addr)
     
-    local _p1_x_pos = memory.readword(_p1_x_pos_address)
-    local _p2_x_pos = memory.readword(_p2_x_pos_address)
-    memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_midpoint_offset)
-    memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_midpoint_offset)
-    _p1_x_pos = memory.readword(_p1_x_pos_address)
-    _p2_x_pos = memory.readword(_p2_x_pos_address)
-
-    local _players_relative_position = _p2_x_pos - _p1_x_pos
-
+    local _players_relative_position = P2.pos_x - P1.pos_x --determines who's on P1 side
+    
     if training_settings.random_position_mode == 2 then
       if _players_relative_position > 0 then
-        memory.writeword(_p1_x_pos_address, _p1_x_pos - _random_distance_1)
+        memory.writeword(P1.pos_x_addr, P1.pos_x - _random_distance_single_character)
       else
-        memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_distance_1)
+        memory.writeword(P1.pos_x_addr, P1.pos_x + _random_distance_single_character)
       end
     end
-
+    
     if training_settings.random_position_mode == 3 then
       if _players_relative_position > 0 then
-        memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_distance_2)
+        memory.writeword(P2.pos_x_addr, P2.pos_x + _random_distance_single_character)
       else
-        memory.writeword(_p2_x_pos_address, _p2_x_pos - _random_distance_2)
+        memory.writeword(P2.pos_x_addr, P2.pos_x - _random_distance_single_character)
       end
     end
-
+    
     if training_settings.random_position_mode == 4 then
+      local _random_distance_second_character = math.random(0, training_settings.load_distance_variation)
       if _players_relative_position > 0 then
-        memory.writeword(_p1_x_pos_address, _p1_x_pos - _random_distance_2)
-        memory.writeword(_p2_x_pos_address, _p2_x_pos + _random_distance_2)
+        memory.writeword(P1.pos_x_addr, P1.pos_x - _random_distance_single_character)
+        memory.writeword(P2.pos_x_addr, P2.pos_x + _random_distance_second_character)
       else
-        memory.writeword(_p1_x_pos_address, _p1_x_pos + _random_distance_2)
-        memory.writeword(_p2_x_pos_address, _p2_x_pos - _random_distance_2)
+        memory.writeword(P1.pos_x_addr, P1.pos_x + _random_distance_single_character)
+        memory.writeword(P2.pos_x_addr, P2.pos_x - _random_distance_second_character)
       end
     end
   end
