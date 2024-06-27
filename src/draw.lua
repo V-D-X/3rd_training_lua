@@ -257,3 +257,55 @@ function draw_vertical_line(_x, _y_start, _y_end, _color, _thickness)
   local _t = _y_start - 1
   gui.box(_l, _b, _r, _t, _color, 0x00000000)
 end
+
+
+-- add Ashtanga
+-- ��������\��
+--function draw_memorys(_x, _y, _addr, _add)
+  function draw_memorys(_x, _y, _addr)
+    --  local addr = _addr - (_addr % 0x100) + _add
+      local addr = _addr - (_addr % 0x100)
+      local i    = 0
+      local j    = 0
+      local tmp  = 0
+      local col  = 0
+      local yadd = 7
+    
+      for i = 0, 15 do
+          gui.text  (_x+9*i+36, _y+4*j, string.format("%02X ", i), 0xFFFF00FF, 0x000000FF)
+      end
+      for j = 0, 15 do
+        for i = 0, 15 do
+          tmp = addr + j*0x10 + i
+    
+          --if(tmp == _addr) then
+          --  col = 0xFF0000FF
+          --elseif(i % 4 == 0) then
+          if(i % 4 == 0) then
+            col = 0x88FFFFFF
+          else
+            col = 0xFFFFFFFF
+          end
+    
+          for j,m in ipairs(address_array) do
+            --print(string.format("%d[%s]",j,m)) 
+            if(tmp == m) then
+              col = 0xFFFF00FF
+              break
+            elseif(tmp < m) then
+              break
+            end
+          end
+    
+          if(i == 15) then
+            gui.text  (_x+9*i+36, _y+yadd*(j+1), string.format("%02X\n", memory.readbyte(tmp)), col, 0x000000FF)
+          elseif(i == 0) then
+            gui.text  (_x+9*i,    _y+yadd*(j+1), string.format("%08X ",  tmp),                  0xFFFF00FF, 0x000000FF)
+            gui.text  (_x+9*i+36, _y+yadd*(j+1), string.format("%02X ",  memory.readbyte(tmp)), col, 0x000000FF)
+          else
+            gui.text  (_x+9*i+36, _y+yadd*(j+1), string.format("%02X ",  memory.readbyte(tmp)), col, 0x000000FF)
+          end
+        end
+      end
+    end
+    

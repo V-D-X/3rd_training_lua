@@ -1669,6 +1669,9 @@ training_settings = {
   replay_start_distance = 100,
   replay_start_height = 70,
 
+  -- dev mode
+  display_base_address = 0x020259F0,
+
   idle_display_timer_mode = 1,
   random_position_mode = 1,
   load_distance_variation = 0, 
@@ -2363,6 +2366,13 @@ function on_start()
   load_frame_data()
   emu.speedmode("normal")
 
+  -- ��add ashtanga : dev mode
+
+  display_base_address1 = training_settings.display_base_address
+  display_base_address2 = display_base_address1 + 0x100
+  display_memory = true
+  display_memory = false
+
   if not developer_mode then
     start_character_select_sequence()
   end
@@ -2405,16 +2415,49 @@ function hotkey3()
     memory.writebyte(playerOneXSubpixelAddress, 0)
     memory.writebyte(playerTwoXSubpixelAddress, 0)
 
-    local xPosAddress
 
-    if current_recording_state == 1 then --normal or replay is playing, controlling P1
-      xPosAddress = P1.base + 0x64
-      memory.writeword(xPosAddress, P1.pos_x + 1)
-    else 
-      xPosAddress = P2.base + 0x64
-      memory.writeword(xPosAddress, P2.pos_x + 1)
-    end 
+-- add ashtanga
+function hotkey4()
+  if display_memory == true then
+    display_memory = false
+  else
+    display_memory = true
   end
+end
+
+function change_base_address(_address, _add)
+  if(_add == 0) then
+    training_settings.display_base_address = training_settings.display_base_address + _address
+  else
+    training_settings.display_base_address = training_settings.display_base_address - _address
+  end
+  display_base_address1 = training_settings.display_base_address
+  display_base_address2 = display_base_address1 + 0x100
+  save_training_data()
+end
+
+function hotkey5()
+  change_base_address(0x1000, 0)
+end
+
+function hotkey6()
+  change_base_address(0x1000, 1)
+end
+
+function hotkey7()
+  change_base_address(0x100, 0)
+end
+
+function hotkey8()
+  change_base_address(0x100, 1)
+end
+
+if developer_mode == true then
+  input.registerhotkey(4, hotkey4)
+  input.registerhotkey(5, hotkey5)
+  input.registerhotkey(6, hotkey6)
+  input.registerhotkey(7, hotkey7)
+  input.registerhotkey(8, hotkey8)
 end
 
 input.registerhotkey(1, hotkey1)
@@ -3550,6 +3593,10 @@ function on_gui()
       disp_cancel_timing(P2)
     end
   end -- is_in_match
+
+  if(display_memory == true and developer_mode == true) then
+    draw_memorys( 10, 60, display_base_address1)
+  end
 
   -- ���j���[�\��
   if is_menu_open then
