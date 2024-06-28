@@ -532,6 +532,12 @@ random_position_mode = {
   "P1+P2",
 }
 
+random_gauge_mode = {
+  "disable",
+  "meter",
+  "health",
+}
+
 idle_display_timer_mode = {
   "off",
   "on",
@@ -1613,14 +1619,16 @@ training_settings = {
   life_mode = 2,
   p1_life_reset_value = 160, -- add ashtanga
   p2_life_reset_value = 160, -- add ashtanga
+  life_refill_delay = 30,
   meter_mode = 2,
   p1_meter = 0,
   p2_meter = 0,
+  meter_refill_delay = 30,
   infinite_sa_time = false,
   stun_mode = 3,
   p1_stun_reset_value = 0,
   p2_stun_reset_value = 0,
-  stun_reset_delay = 20,
+  stun_reset_delay = 30,
   display_input = true,
   display_gauges = false,
   display_p1_input_history = false,
@@ -1640,8 +1648,6 @@ training_settings = {
   current_recording_slot = 1,
   replay_mode = 1,
   music_volume = 10,
-  life_refill_delay = 20,
-  meter_refill_delay = 20,
   fast_forward_intro = true,
 
   -- special training
@@ -1677,6 +1683,9 @@ training_settings = {
   load_distance_variation = 0, 
   character_midpoint_variation = 0,
   display_digital_clock = false,
+
+  random_gauge_mode = 1,
+  load_gauge_variation = 0,
 }
 
 debug_settings = {
@@ -1688,27 +1697,37 @@ debug_settings = {
   debug_move = "",
 }
 
---life_refill_delay_item = integer_menu_item("  Life refill delay", training_settings, "life_refill_delay", 1, 100, false, 20)
---life_refill_delay_item.is_disabled = function()
---  return training_settings.life_mode ~= 2
---end
 p1_life_refill_delay_item = gauge_menu_item("  P1 Life reset value", training_settings, "p1_life_reset_value", 1, 0x00FF00FF, 160, 160)
 p2_life_refill_delay_item = gauge_menu_item("  P2 Life reset value", training_settings, "p2_life_reset_value", 1, 0x00FF00FF, 160, 160)
+life_refill_delay_item = integer_menu_item("  Life refill delay", training_settings, "life_refill_delay", 1, 100, false, 30, 1)
+
 p1_life_refill_delay_item.is_disabled = function()
   return training_settings.life_mode ~= 2
 end
 p2_life_refill_delay_item.is_disabled = p1_life_refill_delay_item.is_disabled
+life_refill_delay_item.is_disabled = p1_life_refill_delay_item.is_disabled
+
 
 p1_stun_reset_value_gauge_item = gauge_menu_item("  P1 Stun reset value", training_settings, "p1_stun_reset_value", 64, 0xFF0000FF)
 p2_stun_reset_value_gauge_item = gauge_menu_item("  P2 Stun reset value", training_settings, "p2_stun_reset_value", 64, 0xFF0000FF)
 p1_stun_reset_value_gauge_item.unit = 1
 p2_stun_reset_value_gauge_item.unit = 1
-stun_reset_delay_item = integer_menu_item("  Stun reset delay", training_settings, "stun_reset_delay", 1, 100, false, 20)
+stun_reset_delay_item = integer_menu_item("  Stun reset delay", training_settings, "stun_reset_delay", 1, 100, false, 30, 1)
 p1_stun_reset_value_gauge_item.is_disabled = function()
   return training_settings.stun_mode ~= 3
 end
 p2_stun_reset_value_gauge_item.is_disabled = p1_stun_reset_value_gauge_item.is_disabled
 stun_reset_delay_item.is_disabled = p1_stun_reset_value_gauge_item.is_disabled
+
+p1_meter_gauge_item = gauge_menu_item("  P1 Meter", training_settings, "p1_meter", 1, 0x0000FFFF)
+p2_meter_gauge_item = gauge_menu_item("  P2 Meter", training_settings, "p2_meter", 1, 0x0000FFFF)
+meter_refill_delay_item = integer_menu_item("  Meter refill delay", training_settings, "meter_refill_delay", 1, 100, false, 30, 1)
+
+p1_meter_gauge_item.is_disabled = function()
+  return training_settings.meter_mode ~= 2
+end
+p2_meter_gauge_item.is_disabled = p1_meter_gauge_item.is_disabled
+meter_refill_delay_item.is_disabled = p1_meter_gauge_item.is_disabled
 
 -- ��add ashtanga
 distance_replay_item = integer_menu_item("  Replay start distance", training_settings, "replay_start_distance", 1, 200, false, 100)
@@ -1740,6 +1759,11 @@ end
 character_midpoint_variation_item = integer_menu_item("  Screen position variation", training_settings, "character_midpoint_variation", 0, 800, false, 0, 1)
 character_midpoint_variation_item.is_disabled = function()
   return training_settings.random_position_mode == 1
+end
+
+random_gauge_variation_item = integer_menu_item("  Gauge variation", training_settings, "load_gauge_variation", 0, 50, false, 0, 1)
+random_gauge_variation_item.is_disabled = function()
+  return training_settings.random_gauge_mode == 1
 end
 
 slot_weight_item = integer_menu_item("Weight", nil, "weight", 0, 100, false, 1)
@@ -1848,9 +1872,9 @@ main_menu = make_multitab_menu(
         change_characters_item,
         checkbox_menu_item("Infinite Time", training_settings, "infinite_time", true),
         list_menu_item("Life Refill Mode", training_settings, "life_mode", life_mode, 2),
-        --life_refill_delay_item,
         p1_life_refill_delay_item,
         p2_life_refill_delay_item,
+        life_refill_delay_item,
         list_menu_item("Stun Mode", training_settings, "stun_mode", stun_mode, 3),
         p1_stun_reset_value_gauge_item,
         p2_stun_reset_value_gauge_item,
@@ -1901,6 +1925,9 @@ main_menu = make_multitab_menu(
         list_menu_item("Random Position On Load", training_settings, "random_position_mode", random_position_mode),
         random_distance_on_load_item,
         character_midpoint_variation_item,
+        
+        list_menu_item("Random Gauges On Load", training_settings, "random_gauge_mode", random_gauge_mode),
+        random_gauge_variation_item,
 
         checkbox_menu_item("Display Local Time", training_settings, "display_digital_clock"),
       }
@@ -2323,10 +2350,10 @@ function on_load_state()
 
     local _random_distance_single_character = math.random(0, training_settings.load_distance_variation)
     local _max_midpoint_variation = training_settings.character_midpoint_variation
-    local _random_midpoint_offset = math.random(-_max_midpoint_variation, _max_midpoint_variation)
+    local _random_midpoint_variation = math.random(-_max_midpoint_variation, _max_midpoint_variation)
 
-    memory.writeword(P1.pos_x_addr, P1.pos_x + _random_midpoint_offset) --randomized midpoint between characters
-    memory.writeword(P2.pos_x_addr, P2.pos_x + _random_midpoint_offset)
+    memory.writeword(P1.pos_x_addr, P1.pos_x + _random_midpoint_variation) --randomized midpoint between characters
+    memory.writeword(P2.pos_x_addr, P2.pos_x + _random_midpoint_variation)
     P1.pos_x = memory.readword(P1.pos_x_addr)
     P2.pos_x = memory.readword(P2.pos_x_addr)
     
@@ -2357,6 +2384,37 @@ function on_load_state()
         memory.writeword(P1.pos_x_addr, P1.pos_x + _random_distance_single_character)
         memory.writeword(P2.pos_x_addr, P2.pos_x - _random_distance_second_character)
       end
+    end
+  end
+
+  if training_settings.random_gauge_mode ~= 1 and is_in_match then
+
+    if not swap_characters then
+      _player_obj = P1
+      _dummy_obj = P2
+    else
+      _player_obj = P2
+      _dummy_obj = P1
+    end
+
+    local _random_gauge_variation = math.random(0, training_settings.load_gauge_variation)
+
+    if training_settings.random_gauge_mode == 2 then
+      local _randomized_gauge = _player_obj.meter_gauge + _random_gauge_variation
+      local _wanted_gauge = (_randomized_gauge) % (_player_obj.max_meter_gauge + 1) --Allows 80/80 meter like real games
+      memory.writebyte(_player_obj.gauge_addr,  _wanted_gauge)
+
+      local _previous_meter_count = memory.readbyte(_player_obj.meter_addr[2])
+      local _wanted_meter_count = math.floor(_randomized_gauge / (_player_obj.max_meter_gauge + 1))
+      if _previous_meter_count ~= _wanted_meter_count then
+        memory.writebyte(_player_obj.meter_addr[2], _wanted_meter_count)
+        memory.writebyte(_player_obj.meter_update_flag, 0x01)
+      end
+    end
+
+    if training_settings.random_gauge_mode == 3 then
+      local _randomized_life = _dummy_obj.life - _random_gauge_variation
+      memory.writebyte(_dummy_obj.life_addr, _randomized_life)    
     end
   end
 end

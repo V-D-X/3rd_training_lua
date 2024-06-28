@@ -62,7 +62,7 @@ function reset_player_objects()
   P2 = player_objects[2]
 
   P1.pos_x_addr = 0x02068CD0
-  P1.pos_xcounter = P1.pos_x_addr + 0x2
+  P1.pos_xcounter_addr = P1.pos_x_addr + 0x2
   P1.gauge_addr = 0x020695B5
   P1.meter_addr = { 0x020286AB, 0x020695BF } -- 2nd address is the master variable
   P1.stun_status = 0x020695F4
@@ -363,7 +363,8 @@ function read_player_vars(_player_obj)
   _player_obj.is_crouched = _player_obj.posture == 0x20
 
   -- LIFE
-  _player_obj.life = memory.readbyte(_player_obj.base + 0x9F)
+  _player_obj.life_addr = _player_obj.base + 0x9F
+  _player_obj.life = memory.readbyte(_player_obj.life_addr)
 
   -- COMBO
     _player_obj.previous_combo = _player_obj.combo or 0
