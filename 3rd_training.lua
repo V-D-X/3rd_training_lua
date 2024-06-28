@@ -1739,18 +1739,6 @@ height_replay_item.is_disabled = function()
   return training_settings.height_replay_mode == 1
 end
 
---p1_meter_gauge_item = gauge_menu_item("  P1 Meter", training_settings, "p1_meter", 2, 0x0000FFFF)
---p2_meter_gauge_item = gauge_menu_item("  P2 Meter", training_settings, "p2_meter", 2, 0x0000FFFF)
-p1_meter_gauge_item = gauge_menu_item("  P1 Meter", training_settings, "p1_meter", 1, 0x0000FFFF)
-p2_meter_gauge_item = gauge_menu_item("  P2 Meter", training_settings, "p2_meter", 1, 0x0000FFFF)
-meter_refill_delay_item = integer_menu_item("  Meter refill delay", training_settings, "meter_refill_delay", 1, 100, false, 20)
-
-p1_meter_gauge_item.is_disabled = function()
-  return training_settings.meter_mode ~= 2
-end
-p2_meter_gauge_item.is_disabled = p1_meter_gauge_item.is_disabled
-meter_refill_delay_item.is_disabled = p1_meter_gauge_item.is_disabled
-
 random_distance_on_load_item = integer_menu_item("  Character distance variation", training_settings, "load_distance_variation", 0, 250, false, 0, 1)
 random_distance_on_load_item.is_disabled = function()
   return training_settings.random_position_mode == 1
@@ -2445,21 +2433,11 @@ function hotkey2()
   if character_select_sequence_state ~= 0 then
     select_gill()
   else
-    local playerOneXSubpixelAddress = P1.base + 0x66
-    local playerTwoXSubpixelAddress = P2.base + 0x66
+    memory.writebyte(P1.pos_xcounter_addr, 0) --zero out the subpixel
+    memory.writebyte(P2.pos_xcounter_addr, 0)
 
-    memory.writebyte(playerOneXSubpixelAddress, 0)
-    memory.writebyte(playerTwoXSubpixelAddress, 0)
-
-    local xPosAddress
-
-    if current_recording_state == 1 then --normal or replay is playing, controlling P1
-      xPosAddress = P1.base + 0x64
-      memory.writeword(xPosAddress, P1.pos_x - 1)
-    else 
-      xPosAddress = P2.base + 0x64
-      memory.writeword(xPosAddress, P2.pos_x - 1)
-    end 
+    current_pos_x = memory.readword(player.pos_x_addr) --rereading allows multiple adjustments per frame    
+    memory.writeword(player.pos_x_addr, current_pos_x - 1)
   end
 end
 
@@ -2467,12 +2445,13 @@ function hotkey3()
   if character_select_sequence_state ~= 0 then
     select_shingouki()
   else
-    local playerOneXSubpixelAddress = P1.base + 0x66
-    local playerTwoXSubpixelAddress = P2.base + 0x66
+    memory.writebyte(P1.pos_xcounter_addr, 0) --zero out the subpixel
+    memory.writebyte(P2.pos_xcounter_addr, 0)
 
-    memory.writebyte(playerOneXSubpixelAddress, 0)
-    memory.writebyte(playerTwoXSubpixelAddress, 0)
-
+    current_pos_x = memory.readword(player.pos_x_addr) --rereading allows multiple adjustments per frame    
+    memory.writeword(player.pos_x_addr, current_pos_x + 1)
+  end
+end
 
 -- add ashtanga
 function hotkey4()
@@ -2760,30 +2739,30 @@ function on_gui()
     display_draw_printed_geometry()
 
 
-    -- �R���{�_���[�W�ʌv�Z
-    local _damage_freeze_cnt_p1_zero_edge = false
-    local _damage_freeze_cnt_p2_zero_edge = false
-    if((damage_freeze_cnt_p1 ~= 0) and (memory.readbyte(0x02068DF3) == 0)) then
-      _damage_freeze_cnt_p1_zero_edge = true
-    end
-    if((damage_freeze_cnt_p2 ~= 0) and (memory.readbyte(0x0206928B) == 0)) then
-      _damage_freeze_cnt_p2_zero_edge = true
-    end
-    -- �R���{��0 �܂��� �̂�����J�E���^��0�ƂȂ����Ƃ��ɏ�����
-    if((_damage_freeze_cnt_p1_zero_edge == true) or (memory.readbyte(0x0206961D) == 0)) then
-      player_objects[1].combo_start_life = player_objects[1].life
-    elseif(memory.readbyte(0x0206961D) >= 1) then
-      player_objects[1].combo_damage = player_objects[1].combo_start_life - player_objects[1].life
-    end
-    if((_damage_freeze_cnt_p2_zero_edge == true) or (memory.readbyte(0x020696C5) == 0)) then
-      player_objects[2].combo_start_life = player_objects[2].life
-    elseif(memory.readbyte(0x020696C5) >= 1) then
-      player_objects[2].combo_damage = player_objects[2].combo_start_life - player_objects[2].life
-    end
-    --gui.text(200, 40, string.format("%d", to_bit(player_objects[2].is_idle)))
-    --gui.text(200, 50, string.format("%d", player_objects[2].combo_damage))
-    damage_freeze_cnt_p1 = memory.readbyte(0x02068DF3)
-    damage_freeze_cnt_p2 = memory.readbyte(0x0206928B)
+    -- -- �R���{�_���[�W�ʌv�Z
+    -- local _damage_freeze_cnt_p1_zero_edge = false
+    -- local _damage_freeze_cnt_p2_zero_edge = false
+    -- if((damage_freeze_cnt_p1 ~= 0) and (memory.readbyte(0x02068DF3) == 0)) then
+    --   _damage_freeze_cnt_p1_zero_edge = true
+    -- end
+    -- if((damage_freeze_cnt_p2 ~= 0) and (memory.readbyte(0x0206928B) == 0)) then
+    --   _damage_freeze_cnt_p2_zero_edge = true
+    -- end
+    -- -- �R���{��0 �܂��� �̂�����J�E���^��0�ƂȂ����Ƃ��ɏ�����
+    -- if((_damage_freeze_cnt_p1_zero_edge == true) or (memory.readbyte(0x0206961D) == 0)) then
+    --   player_objects[1].combo_start_life = player_objects[1].life
+    -- elseif(memory.readbyte(0x0206961D) >= 1) then
+    --   player_objects[1].combo_damage = player_objects[1].combo_start_life - player_objects[1].life
+    -- end
+    -- if((_damage_freeze_cnt_p2_zero_edge == true) or (memory.readbyte(0x020696C5) == 0)) then
+    --   player_objects[2].combo_start_life = player_objects[2].life
+    -- elseif(memory.readbyte(0x020696C5) >= 1) then
+    --   player_objects[2].combo_damage = player_objects[2].combo_start_life - player_objects[2].life
+    -- end
+    -- --gui.text(200, 40, string.format("%d", to_bit(player_objects[2].is_idle)))
+    -- --gui.text(200, 50, string.format("%d", player_objects[2].combo_damage))
+    -- damage_freeze_cnt_p1 = memory.readbyte(0x02068DF3)
+    -- damage_freeze_cnt_p2 = memory.readbyte(0x0206928B)
 
 
     if training_settings.display_gauges then
