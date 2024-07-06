@@ -2324,7 +2324,8 @@ function on_load_state()
 
   -- reset recording states in a useful way
   if current_recording_state == 3 then
-    set_recording_state({}, 2)
+    set_recording_state({}, 1) --If someone loads state while recording, they probably messed up and want to try again
+    set_recording_state({}, 3)
   elseif current_recording_state == 4 and (training_settings.replay_mode == 4 or training_settings.replay_mode == 5 or training_settings.replay_mode == 6) then
     set_recording_state({}, 1)
     set_recording_state({}, 4)
@@ -2377,7 +2378,7 @@ function on_load_state()
 
   if training_settings.random_gauge_mode ~= 1 and is_in_match then
 
-    if not swap_characters then
+    if not swap_characters then --bug: using the globals player and dummy causes added meter to be conserved between loadstates
       _player_obj = P1
       _dummy_obj = P2
     else
