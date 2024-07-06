@@ -1,6 +1,8 @@
 -- # global variables
 frame_number = 0
+banner_sequence_frame_number = 0
 is_in_match = false
+is_in_intro_sequence = false
 player_objects = {}
 P1 = nil
 P2 = nil
@@ -177,6 +179,21 @@ function read_game_vars()
   is_in_match = ((p1_locked == 0xFF or p2_locked == 0xFF) and match_state == 0x02);
   has_match_just_started = not _previous_is_in_match and is_in_match
   match_just_loaded = match_state == 0x00;
+  is_in_intro_sequence  = match_state == 0x01;
+
+  --fight banner stuff for replays on round start
+  if not is_in_match then
+    local fight_banner_state = memory.readbyte(0x020154AB); --technically the counter for the white flash after character intros; increments from 0 to 3
+    local fight_banner_reset = fight_banner_state == 0x02; --occurs on the frame before banner sequence starts
+    if  fight_banner_reset == true then
+      training_settings.round_start_banner_first_frame = frame_number
+    end
+    fight_banner_displayed = fight_banner_state == 0x03; 
+    banner_sequence_frame_number = frame_number - training_settings.round_start_banner_first_frame
+  else
+    fight_banner_displayed = false
+
+  end
 end
 
 function read_input(_player_obj)

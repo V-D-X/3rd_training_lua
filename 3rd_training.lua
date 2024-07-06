@@ -110,6 +110,7 @@ height_char   = 0 -- add ashtanga
 
 -- debug options
 developer_mode = false -- Unlock frame data recording options. Touch at your own risk since you may use those options to fuck up some already recorded frame data
+developer_mode = true
 assert_enabled = developer_mode or assert_enabled
 log_enabled = developer_mode or log_enabled
 log_categories_display =
@@ -1317,9 +1318,13 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
 
   local _debug = false
 
-  if not is_in_match then return end
-  if _stick == 1 and _button == 1 then return end
-  if current_recording_state == 4 then return end
+  if not fight_banner_displayed then
+    if not is_in_match then return end
+    if _stick == 1 and _button == 1 then return end
+    if current_recording_state == 4 then return end
+  end
+
+  dbprint("running")
 
   function handle_recording()
     if button_gesture[_button] == "recording" and dummy.id == 2 then
@@ -1341,8 +1346,24 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
       if _debug then
         print(string.format("frame offset: %d", _delay + _random_deviation))
       end
+      dbprint(_delay + _random_deviation,"_delay + _random_deviation")
       _defender.counter.attack_frame = _defender.counter.attack_frame + _delay + _random_deviation
     end
+  end
+
+  if training_settings.replay_on_round_start and fight_banner_displayed then
+    _defender.counter.attack_frame = training_settings.round_start_banner_first_frame + 144 + 11-- the +1 here means that there is an error somehere but I don't know where. the remaining wakeup time seems ok
+    _defender.counter.sequence, _defender.counter.offset = make_input_sequence(stick_gesture[_stick], button_gesture[_button])
+    handle_recording()
+
+    --[[
+          goal: replay starts based off of fight banner. detect what frame of the fight banner is on, then start 
+            based off of replay attributes. 
+
+          Do I need a reset upon entering banner from different states? May need to manually clear P2 on load
+          
+        ]]
+
   end
 
   if _defender.has_just_parried then
@@ -1361,11 +1382,11 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
     handle_recording()
 
   elseif _defender.has_just_been_hit or _defender.has_just_blocked then
-    if _debug then
-      print(frame_number.." - init ca (hit/block)")
-    end
-    log(_defender.prefix, "counter_attack", "init ca (hit/block)")
-    _defender.counter.ref_time = _defender.recovery_time
+    -- if _debug then
+    --   print(frame_number.." - init ca (hit/block)")
+    -- end
+    -- log(_defender.prefix, "counter_attack", "init ca (hit/block)")
+    -- _defender.counter.ref_time = _defender.recovery_time
     clear_input_sequence(_defender)
     _defender.counter.attack_frame = -1
     _defender.counter.sequence = nil
@@ -1374,10 +1395,10 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
     if _defender.remaining_wakeup_time == 0 then
       return
     end
-    if _debug then
-      print(frame_number.." - init ca (wake up)")
-    end
-    log(_defender.prefix, "counter_attack", "init ca (wakeup)")
+    -- if _debug then
+    --   print(frame_number.." - init ca (wake up)")
+    -- end
+    -- log(_defender.prefix, "counter_attack", "init ca (wakeup)")
     _defender.counter.attack_frame = frame_number + _defender.remaining_wakeup_time + 1 -- the +1 here means that there is an error somehere but I don't know where. the remaining wakeup time seems ok
     _defender.counter.sequence, _defender.counter.offset = make_input_sequence(stick_gesture[_stick], button_gesture[_button])
     _defender.counter.ref_time = -1
@@ -1647,6 +1668,8 @@ training_settings = {
   auto_crop_recording_end = true,
   current_recording_slot = 1,
   replay_mode = 1,
+  replay_on_round_start = false,
+  round_start_banner_first_frame = 0,
   music_volume = 10,
   fast_forward_intro = true,
 
@@ -2103,6 +2126,15 @@ function set_recording_state(_input, _state)
 end
 
 function update_recording(_input)
+  if is_in_intro_sequence then --toggle Replay on Round Start
+    if player.input.pressed.coin then
+      training_settings.replay_on_round_start = not training_settings.replay_on_round_start
+    end 
+  end
+
+  if training_settings.replay_on_round_start then
+    --GUI stuff here or elsewhere?
+  end
 
   local _input_buffer_length = 11
   if is_in_match and not is_menu_open then
@@ -2506,6 +2538,8 @@ end
 
 function before_frame()
 
+-- dbprint(frame_number,"frame_number")
+
   -- update debug menu
   if debug_settings.debug_character ~= debug_move_menu_item.map_property then
     debug_move_menu_item.map_object = frame_data
@@ -2618,7 +2652,7 @@ function before_frame()
   -- recording
   update_recording(_input)
 
-  if not is_menu_open and is_in_match then
+  if not is_menu_open and (is_in_match or is_in_intro_sequence) then
     for _i = 1,2 do
       local _player_object = player_objects[_i]
       local _sequence = _player_object.pending_input_sequence
@@ -2716,6 +2750,7 @@ function before_frame()
   end
 
   log_update()
+  -- dbprint(" ")
 end
 
 is_menu_open = false
@@ -3170,6 +3205,9 @@ function on_gui()
     _should_toggle = not log_start_locked and _should_toggle
 
     if _should_toggle then
+      -- dbprint(P1.input) --testing to see if we can stop autofire on menu load
+      -- check_input_down_autofire(player_objects[1], "down", _vertical_autofire_rate),
+      -- P1.input.state_time["down"] = 0
       is_menu_open = (not is_menu_open)
       if is_menu_open then
         menu_stack_push(main_menu)

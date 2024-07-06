@@ -430,6 +430,8 @@ function log_state(_obj, _names)
   print(_str)
 end
 
-function dbprint(_param) --good ol print statements. nothing beats that
-  print(_param)
+function dbprint(_param, _param_label) --print statement with optional label for value
+  local _str = _param_label and tostring(_param_label)..": " or ""
+  _str = _str..tostring(_param) 
+  print(_str)
 end
