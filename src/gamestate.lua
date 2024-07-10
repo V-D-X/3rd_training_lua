@@ -185,14 +185,13 @@ function read_game_vars()
   if not is_in_match then
     local fight_banner_state = memory.readbyte(0x020154AB); --technically the counter for the white flash after character intros; increments from 0 to 3
     local fight_banner_reset = fight_banner_state == 0x02; --occurs on the frame before banner sequence starts
-    if  fight_banner_reset == true then
+    if fight_banner_reset == true then
       training_settings.round_start_banner_first_frame = frame_number
     end
     fight_banner_displayed = fight_banner_state == 0x03; 
     banner_sequence_frame_number = frame_number - training_settings.round_start_banner_first_frame
   else
     fight_banner_displayed = false
-
   end
 end
 

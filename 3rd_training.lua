@@ -1324,8 +1324,6 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
     if current_recording_state == 4 then return end
   end
 
-  dbprint("running")
-
   function handle_recording()
     if button_gesture[_button] == "recording" and dummy.id == 2 then
       local _slot_index = training_settings.current_recording_slot
@@ -1352,7 +1350,7 @@ function update_counter_attack(_input, _attacker, _defender, _stick, _button)
   end
 
   if training_settings.replay_on_round_start and fight_banner_displayed then
-    _defender.counter.attack_frame = training_settings.round_start_banner_first_frame + 144 + 11-- the +1 here means that there is an error somehere but I don't know where. the remaining wakeup time seems ok
+    _defender.counter.attack_frame = training_settings.round_start_banner_first_frame + 144 -- the +1 here means that there is an error somehere but I don't know where. the remaining wakeup time seems ok
     _defender.counter.sequence, _defender.counter.offset = make_input_sequence(stick_gesture[_stick], button_gesture[_button])
     handle_recording()
 
@@ -2129,11 +2127,14 @@ function update_recording(_input)
   if is_in_intro_sequence then --toggle Replay on Round Start
     if player.input.pressed.coin then
       training_settings.replay_on_round_start = not training_settings.replay_on_round_start
+      if not training_settings.replay_on_round_start then 
+        --bug: currently, replays will play if the flag was on at any point in the start banner, even after disabled. Player obj was nil at this point
+        clear_input_sequence(dummy) --this should work once we fix the bug on 2658
+      end
     end 
-  end
 
-  if training_settings.replay_on_round_start then
-    --GUI stuff here or elsewhere?
+    _text = "Replay on Round Start: "..tostring(training_settings.replay_on_round_start)
+    gui.text(9, 5, _text, text_default_color, text_default_border_color)
   end
 
   local _input_buffer_length = 11
@@ -2409,6 +2410,8 @@ function on_load_state()
   end
 
   if training_settings.random_gauge_mode ~= 1 and is_in_match then
+    local _player_obj
+    local _dummy_obj
 
     if not swap_characters then --bug: using the globals player and dummy causes added meter to be conserved between loadstates
       _player_obj = P1
@@ -2649,13 +2652,20 @@ function before_frame()
     height_char     = 0
   end
 
+  dbprint("Frame start")
+  dbprint(player_objects[2],"player_objects[2]")
+  
   -- recording
   update_recording(_input)
 
+  -- if not is_menu_open and is_in_match then 
+    --rewriting this line causes replays to stop playing first frame of round start
   if not is_menu_open and (is_in_match or is_in_intro_sequence) then
     for _i = 1,2 do
       local _player_object = player_objects[_i]
       local _sequence = _player_object.pending_input_sequence
+      dbprint(_player_object,"_player_object")
+      dbprint(_sequence,"_sequence")
       if _sequence ~= nil then
         process_input_sequence(_player_object, _sequence, _input, training_settings.disable_replay_flip)
         if _sequence.current_frame > #_sequence.sequence then
