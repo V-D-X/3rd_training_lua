@@ -82,7 +82,26 @@ function process_input_sequence(_player_obj, _sequence, _input, _disable_replay_
     local _current_frame_input = _sequence.sequence[_sequence.current_frame]
     for i = 1, #_current_frame_input do
       local _input_name = _player_obj.prefix.." "
-      if _current_frame_input[i] == "forward" then
+
+      --Special flags for replays
+      if string.sub(_current_frame_input[i], 1, 2) == "rh" then --random hold; holds current frame for an additional 0-x frames
+        if not training_settings.replay_pause_enabled then --first frame of random hold sequence
+          training_settings.replay_pause_enabled = true
+          training_settings.replay_random_hold_time_remaining = math.random(0, tonumber(string.sub(_current_frame_input[i], 3)))
+        end
+        if training_settings.replay_random_hold_time_remaining == 0 then --last frame of the random hold sequence
+          training_settings.replay_pause_enabled = false
+        else
+          training_settings.replay_random_hold_time_remaining = training_settings.replay_random_hold_time_remaining - 1
+        end
+      elseif string.sub(_current_frame_input[i], 1, 2) == "ol" then --on land; holds current frame landing
+        if dummy.pos_y == 0 then 
+          training_settings.replay_pause_enabled = false
+        else 
+          training_settings.replay_pause_enabled = true
+        end
+
+      elseif _current_frame_input[i] == "forward" then
         if _player_obj.flip_input and _disable_replay_flip == false then _input_name = _input_name.."Right" else _input_name = _input_name.."Left" end
       elseif _current_frame_input[i] == "back" then
         if _player_obj.flip_input and _disable_replay_flip == false then _input_name = _input_name.."Left" else _input_name = _input_name.."Right" end
@@ -138,7 +157,9 @@ function process_input_sequence(_player_obj, _sequence, _input, _disable_replay_
   end
   --print(_s)
 
-  _sequence.current_frame = _sequence.current_frame + 1
+  if not training_settings.replay_pause_enabled then
+    _sequence.current_frame = _sequence.current_frame + 1
+  end
 end
 
 

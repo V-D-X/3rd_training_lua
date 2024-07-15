@@ -1686,6 +1686,9 @@ training_settings = {
 
   random_gauge_mode = 1,
   load_gauge_variation = 0,
+
+  replay_pause_enabled = false,
+  replay_random_hold_time_remaining = 0,
 }
 
 debug_settings = {
@@ -2083,6 +2086,7 @@ function set_recording_state(_input, _state)
     make_input_empty(_input)
     recording_slots[training_settings.current_recording_slot].inputs = {}
   elseif current_recording_state == 4 then
+    reset_recording_flags()
     local _replay_slot = -1
     if override_replay_slot > 0 then
       _replay_slot = override_replay_slot
@@ -2169,6 +2173,11 @@ function update_recording(_input)
   end
 
   previous_recording_state = current_recording_state
+end
+
+function reset_recording_flags()
+  training_settings.replay_pause_enabled = false
+  training_settings.replay_random_hold_time_remaining = 0
 end
 
 -- PROGRAM
