@@ -1092,14 +1092,14 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
             elseif _mode == 4 then -- random
               if not _dummy.blocking.block_string then
                 local _r = math.random()
-								-- non-random blocking style: no conditional probabilities to account for
+		-- non-random blocking style: no conditional probabilities to account for
                 if _style ~= 5 and _r > 0.5 then
                   _dummy.blocking.randomized_out = true
                   if _debug then
                     print(string.format(" %d: next hit randomized out", frame_number))
                   end
-								-- random blocking style: 33% chance to not block; remaining 66% will be split in half in the next stage for equal weighting among hit/block/parry
-								elseif _style == 5 and _r > 0.33333333333333 then
+		-- random blocking style: 33% chance to not block; remaining 66% will be split in half in the next stage for equal weighting among hit/block/parry
+		elseif _style == 5 and _r > 0.33333333333333 then
                   _dummy.blocking.randomized_out = true
                   if _debug then
                     print(string.format(" %d: next hit randomized out", frame_number))
