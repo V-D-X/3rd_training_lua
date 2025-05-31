@@ -414,6 +414,7 @@ blocking_style =
   "parry",
   "red parry",
   "block_A", -- add ashtanga
+  "random",
 }
 
 blocking_mode =
@@ -1091,7 +1092,14 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
             elseif _mode == 4 then -- random
               if not _dummy.blocking.block_string then
                 local _r = math.random()
-                if _r > 0.5 then
+		-- non-random blocking style: no conditional probabilities to account for
+                if _style ~= 5 and _r > 0.5 then
+                  _dummy.blocking.randomized_out = true
+                  if _debug then
+                    print(string.format(" %d: next hit randomized out", frame_number))
+                  end
+		-- random blocking style: 33% chance to not block; remaining 66% will be split in half in the next stage for equal weighting among hit/block/parry
+		elseif _style == 5 and _r > 0.33333333333333 then
                   _dummy.blocking.randomized_out = true
                   if _debug then
                     print(string.format(" %d: next hit randomized out", frame_number))
@@ -1227,6 +1235,15 @@ function update_blocking(_input, _player, _dummy, _mode, _style, _red_parry_hit_
       _animation_frame_delta = _dummy.blocking.projectile_hit_frame - frame_number
     else
       _animation_frame_delta = _dummy.blocking.expected_attack_animation_hit_frame - _player_relevant_animation_frame
+    end
+
+    if _blocking_style == 5 then
+      local _r = math.random()
+      if _r > 0.5 then
+        _blocking_style = 1
+      else
+        _blocking_style = 2
+      end
     end
 
     -- �K�[�h
